@@ -1,0 +1,184 @@
+.footer{
+  background-color:rgb(101,18,2)
+}
+.foot-logo-area{
+  margin-top:20px;
+}
+.foot-logo-area div{
+ display:inline-block;
+}
+.foot-logo-area div:nth-child(1){
+  width:10%;
+    float:left;
+}
+.foot-logo-area div:nth-child(2){
+  width:80%;
+    float:left;
+}
+.foot-logo-area div:nth-child(3){
+  width:10%;
+  float:left;
+}
+.foot-logo{
+ width:100%;
+ vertical-align:top;
+}
+.foot-logo-area ul {
+  display:inline-block;
+  width:100%;
+
+} 
+.foot-logo-area ul li {
+  width:33.3%;
+  float:left;
+}
+.foot-logo-area ul li span{
+  font-size:25px;
+  color:white;
+  display:inline-block;
+  padding:8px 8px;
+  background-image:url("../images/five-border.png");
+  background-size:100% 100%;
+}
+.foot-logo-area ul li  a{
+  font-size:18px;
+  color:white;
+}
+.pr-m{
+  width:10%;
+  display:inline-block;float:left;
+}
+.pr-m img{
+  width:50%;
+ 
+}
+.about {
+  width:88%;
+  padding:0;
+  margin:25px 6%;
+
+}
+.about li{
+  width:20%;
+  float:left;
+  text-align:center;
+}
+.about li a{
+  font-size:16px;
+  color:white;
+}
+.Copyright{
+  margin-top: 20px;
+  color:white;
+}
+ 
+  .slide .item, .slide .carousel-caption{
+ 
+  color:#343434;
+  text-align:center;
+  text-shadow:0 0;
+  overflow: hidden;
+ }
+.slide  .carousel-control{
+  background-image:none;
+  color:#000;
+  width:5%;
+  font-size:20px;
+   
+}
+.slide .carousel-control:hover span{
+  color:white;
+}
+.slide .carousel-indicators li{
+  background-color:#ccc;
+  border:0;
+  width:12px;
+  height:12px;
+
+}
+.slide.carousel-indicators .active{
+  background-color:#3a3a3a;
+}
+.slide .item h4{
+  font-size: 1.4em;
+  font-weight: 900;
+  margin: .5em 0
+}
+.case .item p{
+  font-size: 1.2em;
+  font-weight: 900;
+  margin: .5em 0
+}
+ 
+@media screen and (max-width:768px){
+  .container:{padding:0;}
+  .foot-logo-area ul{
+    padding:0;
+    margin-top:15px;
+  }
+  .foot-logo-area ul li span{
+    font-size:10px;
+    padding:2px 2px;
+  }
+  .foot-logo-area ul li a{
+    font-size:10px
+  }
+  .foot-logo-area div:nth-child(1){
+  width:15%;
+    float:left;
+}
+.foot-logo-area div:nth-child(2){
+  width:75%;
+    float:left;
+}
+.foot-logo-area div:nth-child(3){
+  width:10%;
+    float:left;
+
+}
+.foot-logo{
+ width:100%;
+ vertical-align:bottom;
+}
+.pr-m img{
+  width:70%;
+  height:50px;
+}
+  .foot-logo-area{
+  margin-top:5px;
+}
+ 
+.about li a{
+   font-size:10px;
+}
+.Copyright p{
+   font-size:10px;
+
+}
+.Copyright{
+  margin-top:10px;
+  color:white;
+}
+.about {
+  width:88%;
+  padding:0;
+  margin-top:5px;
+  margin-bottom:5px;
+}
+}
+@media screen and (max-width:415px){
+   .foot-logo{
+  height:35px;
+}
+  .pr-m img{
+  width:100%;
+height:35px;}
+.foot-logo-area ul{
+  
+    margin-top:5px;
+  }
+}
+@media screen and (max-width:320px){
+  .pr-m img{
+  width:100%;}
+}

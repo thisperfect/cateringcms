@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <title>份量属性管理</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+
+    <link rel="shortcut icon" href="{:C('WEB_FAVICON')}">
+    <link href="ADMIN_TPL_CSS/bootstrap.min-v=3.3.6.css" rel="stylesheet">
+    <link href="ADMIN_TPL_CSS/font-awesome.min-v=4.4.0.css" rel="stylesheet">
+    <link href="ADMIN_TPL_CSS/plugins/iCheck/custom.css" rel="stylesheet">
+    <link href="ADMIN_TPL_CSS/animate.min.css" rel="stylesheet">
+    <link href="ADMIN_TPL_CSS/style.min-v=4.1.0.css" rel="stylesheet">
+    <link href="ADMIN_TPL_CSS/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet">
+    <link href="ADMIN_TPL_CSS/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+
+</head>
+
+<body class="gray-bg">
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-sm-4">
+            <h2>份量属性管理</h2>
+        </div>
+        <div class="col-sm-8">
+            <div class="title-action">
+                <a data-toggle="modal" class="btn btn-primary" href="#modal-form">添加属性</a>
+            </div>
+        </div>
+    </div>
+    <div class="wrapper wrapper-content animated fadeInRightBig">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>属性列表</h5>
+                    </div>
+                    <div class="ibox-content">
+                        <table class="table table-striped table-bordered table-hover dataTables-example" id="weightmanage">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>属性名称</th>
+                                    <th>修改</th>
+                                    <th>删除</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <foreach name="weight" item="weight">
+                                    <tr class="gradeA weight">
+                                        <td><input type="checkbox" name="wid" value="{$weight.id}">&nbsp;&nbsp;&nbsp;{$weight.id}</td>
+                                        <td>{$weight.name}</td>
+                                        <td>
+                                            <a href="{:U('weight/weight_edit?wid='.$weight['id'])}" class="btn btn-primary">修改</a>
+                                        </td>
+                                        <td>
+                                            <a href="javascript:void(0)" onclick="del_weight('{$weight.id}',{$key})" class="btn btn-danger">删除</a>
+                                        </td>
+                                    </tr>
+                                </foreach>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>属性名称</th>
+                                    <th>修改</th>
+                                    <th>删除</th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                        <a href="javascript:void(0)" class="btn btn-primary" onclick="select_all_weight()">全选</a>
+                        <a href="javascript:void(0)" class="btn btn-primary" onclick="select_empty_weight()">全不选</a>
+                        <a href="javascript:void(0)" class="btn btn-primary" onclick="select_reverse_weight()">反选</a>
+                        <a href="javascript:void(0)" class="btn btn-danger" onclick="multi_del_weight()">删除选定</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="modal-form" class="modal fade" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <h3 class="m-t-none m-b">添加属性</h3>
+                            <p>基本信息</p>
+                            <form role="form" id="signupForm">
+                                <div class="form-group">
+                                    <label class="control-label">属性名称：</label>
+                                    <input type="text" id="name" name="name" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">关键词：</label>
+                                    <input type="text" id="keyword" name="keyword" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">描述：</label>
+                                    <input type="text" id="description" name="description" class="form-control">
+                                </div>
+                                <div>
+                                    <button class="btn btn-sm btn-primary pull-right m-t-n-xs" onclick="add_weight()"><strong>提交</strong>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="ADMIN_TPL_JS/jquery.min-v=2.1.4.js"></script>
+    <script src="ADMIN_TPL_JS/bootstrap.min-v=3.3.6.js"></script>
+    <script src="ADMIN_TPL_JS/plugins/iCheck/icheck.min.js"></script>
+    <script src="ADMIN_TPL_JS/plugins/dataTables/jquery.dataTables.js"></script>
+    <script src="ADMIN_TPL_JS/plugins/dataTables/dataTables.bootstrap.js"></script>
+    <script src="ADMIN_TPL_JS/plugins/validate/jquery.validate.min.js"></script>
+    <script src="ADMIN_TPL_JS/plugins/validate/messages_zh.min.js"></script>
+    <script src="ADMIN_TPL_JS/plugins/sweetalert/sweetalert.min.js"></script>
+    <script>
+        var add_weight_url = "{:U('weight/weight_add')}";
+        var del_weight_url = "{:U('weight/weight_del')}";
+        $(document).ready(function () {
+            $(".dataTables-example").dataTable();
+            $(".i-checks").iCheck({
+                checkboxClass: "icheckbox_square-green",
+                radioClass: "iradio_square-green",
+            });
+        });
+    </script>
+    <script src="ADMIN_CUS_JS/weight/weight.js"></script>
+    <script src="ADMIN_CUS_JS/weight/validator.weight.js"></script>
+</body>
+
+</html>

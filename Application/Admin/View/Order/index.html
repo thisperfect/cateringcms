@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <title>{$order_status_name}订单管理</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+
+    <link rel="shortcut icon" href="{:C('WEB_FAVICON')}">
+    <link href="ADMIN_TPL_CSS/bootstrap.min-v=3.3.6.css" rel="stylesheet">
+    <link href="ADMIN_TPL_CSS/font-awesome.min-v=4.4.0.css" rel="stylesheet">
+    <link href="ADMIN_TPL_CSS/animate.min.css" rel="stylesheet">
+    <link href="ADMIN_TPL_CSS/style.min-v=4.1.0.css" rel="stylesheet">
+    <link href="ADMIN_TPL_CSS/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet">
+    <link href="ADMIN_TPL_CSS/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+
+</head>
+
+<body class="gray-bg">
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-sm-4">
+            <h2>{$order_status_name}订单管理</h2>
+        </div>
+        <!--<div class="col-sm-8">
+            <div class="title-action">
+                <a href="{:U('Order/check')}" class="btn btn-primary">账单管理</a>
+            </div>
+        </div>-->
+    </div>
+    <div class="wrapper wrapper-content animated fadeInDown">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>{$order_status_name}订单列表</h5>
+                    </div>
+                    <div class="ibox-content">
+                        <table class="table table-striped table-bordered table-hover dataTables" id="ordermanage">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>用户ID</th>
+                                    <th>订单编号</th>
+                                    <th>联系人/电话/地址</th>
+                                    <th>金额</th>
+                                    <th>时间</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <foreach name="order" item="order">
+                                    <tr class="gradeA order">
+                                        <td><input type="checkbox" name="oid" value="{$order.id}">&nbsp;&nbsp;&nbsp;{$order.id}</td>
+                                        <td>{$order.uid}</td>
+                                        <td>{$order.order_num}</td>
+                                        <td>{$order.shopping_name}/{$order.shopping_tel}</td>
+                                        <td>{$order.total}</td>
+                                        <td>{$order.posttime|date='Y-m-d H:i:s',###}</td>
+                                        <td>
+                                            <div class="btn-group">
+                                                <button data-toggle="dropdown" class="btn btn-default btn-xs dropdown-toggle">操作 <span class="caret"></span></button>
+                                                <ul class="dropdown-menu">
+                                                    <li><a href="{:U('Order/order_edit?oid='.$order['id'])}" class="font-bold">查看/修改</a>
+                                                    </li>
+                                                    <li class="divider"></li>
+                                                    <li><a href="javascript:void(0)" onclick="del_order('{$order.id}',{$key})">删除</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </foreach>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>用户ID</th>
+                                    <th>订单编号</th>
+                                    <th>联系人/电话/地址</th>
+                                    <th>金额</th>
+                                    <th>时间</th>
+                                    <th>操作</th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                        <a href="javascript:void(0)" class="btn btn-primary" onclick="select_all_order()">全选</a>
+                        <a href="javascript:void(0)" class="btn btn-primary" onclick="select_empty_order()">全不选</a>
+                        <a href="javascript:void(0)" class="btn btn-primary" onclick="select_reverse_order()">反选</a>
+                        <a href="javascript:void(0)" class="btn btn-danger" onclick="multi_del_order()">删除选定</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="ADMIN_TPL_JS/jquery.min-v=2.1.4.js"></script>
+    <script src="ADMIN_TPL_JS/bootstrap.min-v=3.3.6.js"></script>
+    <script src="ADMIN_TPL_JS/plugins/dataTables/jquery.dataTables.js"></script>
+    <script src="ADMIN_TPL_JS/plugins/dataTables/dataTables.bootstrap.js"></script>
+    <script src="ADMIN_TPL_JS/plugins/sweetalert/sweetalert.min.js"></script>
+    <script>
+        var del_order_url = "{:U('Order/order_del')}";
+        $(document).ready(function() {
+            $(".dataTables").dataTable();
+        });
+    </script>
+    <script src="ADMIN_CUS_JS/order.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ch-zn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>搜索{$Think.cookie.search_keyword}</title>
+    <meta name="keywords" content="{:C('WEB_KEYWORDS')}">
+    <meta name="description" content="{:C('WEB_DESCRIPTION')}">
+    <link rel="shortcut icon" href="{:C('WEB_FAVICON')}">
+    <link rel="stylesheet" href="HOME_TPL_CSS/bootstrap.min.css">
+    <link rel="stylesheet" href="HOME_TPL_CSS/header.css">
+    <link rel="stylesheet" href="HOME_TPL_CSS/search.css">
+    <link rel="stylesheet" href="HOME_TPL_CSS/buttom.css">
+    <link rel="stylesheet" href="HOME_TPL_CSS/top.css">
+</head>
+
+<body>
+    <!--头部-->
+    <include file="./Static/head" />
+    <!--首页导航栏-->
+    <include file="./Static/nav" />
+    <section class="search">
+        <div class="container">
+            <div class="logo">
+                <img class=" " src="HOME_TPL_IMG/top-logo.png">
+            </div>
+            <form method="get" action="{:U('Menu/search')}" id="searchM">
+                <div class="find-area center-block clearfix">
+                    <div class="input-group">
+                        <input type="text" name="keyword" class="form-control input-lg" placeholder="请输入关键词"><span class="input-group-addon btn btn-warning"
+                            id="search">搜索</span>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </section>
+    <!-- 内容 -->
+    <section>
+        <div class="container">
+            <div class="xbody-top clearfix">
+                <div class="xbody-top-center">
+                    <div class="xmenu">
+                        <ul class="xmenu-ul">
+                            <li class="xmenu-li"><span class="xmenu-a"><span class="glyphicon glyphicon-shopping-cart"></span>(<span id="num"
+                                    style="color: red;">{$cartNum}</span>)</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <p>找到:"<span>{$Think.cookie.search_keyword}</span>"相关菜品<span>{$count}</span>个
+                </>
+                <div class="row">
+                    <foreach name="list" item="data">
+                        <div class="col-md-3 col-xs-6">
+                            <img src="{$data.picurl}" alt="{$data.name}">
+                            <h4>{$data.name}</h4>
+                            <p>￥<span>{$data.price}</span></p>
+                            <button class="btn btn-default"><a href="{:U('Menu/detail?mid='.$data['id'])}">详情</a></button>
+                            <button class="btn btn-danger carts"><a href="">加入购物车</a></button>
+                        </div>
+                    </foreach>
+                </div>
+                <nav aria-label="Page navigation">
+                    <ul class="pagination">
+                        {$page}
+                    </ul>
+                </nav>
+        </div>
+    </section>
+    <!--底部区-->
+    <include file="./Static/footer" />
+    <!--返回顶部按钮-->
+    <a id="gotop" href="JavaScript:void(0)" class="text-center"><img src="HOME_TPL_IMG/returntop.png" alt=""></a>
+    <script src="HOME_TPL_JS/jquery.min.js"></script>
+    <script src="HOME_TPL_JS/bootstrap.min.js"></script>
+    <script type="text/javascript" src="HOME_TPL_JS/jquery.min.js"></script>
+    <script type="text/javascript" src="HOME_TPL_JS/jquery-addShopping.js"></script>
+    <script src="HOME_TPL_JS/top.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $('.carts').shoping({
+                endElement: ".xmenu-a",
+                iconCSS: "",
+                iconImg: "HOME_TPL_IMG/cart.png",
+                endFunction: function (element) {
+                    $("#num").html(parseInt($("#num").html()) + 1);
+                    console.log(element);
+                    return false;
+                }
+            });
+            $('#search').click(function () {
+                $('#searchM').submit();
+            });
+        });
+    </script>
+
+</body>
+
+</html>

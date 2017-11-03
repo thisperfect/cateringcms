@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <title>个人资料</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <link rel="shortcut icon" href="{:C('WEB_FAVICON')}">
+    <link href="ADMIN_TPL_CSS/bootstrap.min-v=3.3.6.css" rel="stylesheet">
+    <link href="ADMIN_TPL_CSS/font-awesome.min-v=4.4.0.css" rel="stylesheet">
+    <link href="ADMIN_TPL_CSS/plugins/iCheck/custom.css" rel="stylesheet">
+    <link href="ADMIN_TPL_CSS/animate.min.css" rel="stylesheet">
+    <link href="ADMIN_TPL_CSS/style.min-v=4.1.0.css" rel="stylesheet">
+    <link href="ADMIN_TPL_CSS/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+</head>
+
+<body class="gray-bg">
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-sm-4">
+            <h2>个人资料</h2>
+        </div>
+    </div>
+    <div class="wrapper wrapper-content animated fadeIn">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>基本信息</h5>
+                    </div>
+                    <div class="ibox-content">
+                        <form class="form-horizontal" id="infoForm">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">用户名：</label>
+                                <div class="col-sm-8">
+                                    <input id="name" name="name" class="form-control" type="text" value="{$admin.name}">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">昵称：</label>
+                                <div class="col-sm-8">
+                                    <input id="nickname" name="nickname" class="form-control" type="text" value="{$admin.nickname}">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">邮箱：</label>
+                                <div class="col-sm-8">
+                                    <input id="email" name="email" class="form-control" type="text" value="{$admin.email}">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">用户组：</label>
+                                <div class="col-sm-8">
+                                    <span class="simple_tag">{$admin.title}</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-8 col-sm-offset-3">
+                                    <button class="btn btn-primary" onclick="edit_info()">提交</button>&nbsp;&nbsp;&nbsp;<a data-toggle="modal" class="btn btn-primary" href="#modal-form">更改密码</a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="modal-form" class="modal fade" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <h3 class="m-t-none m-b">密码修改</h3>
+                            <form role="form" id="passwdForm">
+                                <div class="form-group">
+                                    <label class="control-label">原密码：</label>
+                                    <input type="password" id="old_passwd" name="old_passwd" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">新密码：</label>
+                                    <input type="password" id="password" name="password" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">确认新密码：</label>
+                                    <input type="password" id="confirm_password" name="confirm_password" class="form-control">
+                                </div>
+                                <div>
+                                    <button class="btn btn-sm btn-primary pull-right m-t-n-xs" onclick="edit_passwd()"><strong>提交</strong>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="ADMIN_TPL_JS/jquery.min-v=2.1.4.js"></script>
+    <script src="ADMIN_TPL_JS/bootstrap.min-v=3.3.6.js"></script>
+    <script src="ADMIN_TPL_JS/plugins/iCheck/icheck.min.js"></script>
+    <script src="ADMIN_TPL_JS/plugins/validate/jquery.validate.min.js"></script>
+    <script src="ADMIN_TPL_JS/plugins/validate/messages_zh.min.js"></script>
+    <script src="ADMIN_TPL_JS/plugins/sweetalert/sweetalert.min.js"></script>
+    <script>
+        var edit_info_url = "{:U('Public/edit_info')}";
+        var edit_passwd_url = "{:U('Public/edit_passwd')}";
+        var logout = "{:U('Login/logout')}";
+        var home = "{:U('Index/home')}";
+        $(document).ready(function() {
+            $(".i-checks").iCheck({
+                checkboxClass: "icheckbox_square-green",
+                radioClass: "iradio_square-green",
+            })
+        });
+    </script>
+    <script src="ADMIN_CUS_JS/info/info.js"></script>
+    <script src="ADMIN_CUS_JS/info/validator.info.js"></script>
+    <script src="ADMIN_CUS_JS/info/validator.passwd.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,46 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>{$detail.title}</title>
+    <meta name="keywords" content="{:C('WEB_KEYWORDS')}">
+    <meta name="description" content="{:C('WEB_DESCRIPTION')}">
+    <link rel="shortcut icon" href="{:C('WEB_FAVICON')}">
+
+    <link rel="stylesheet" href="HOME_TPL_CSS/bootstrap.min.css">
+    <link rel="stylesheet" href="HOME_TPL_CSS/header.css">
+    <link rel="stylesheet" href="HOME_TPL_CSS/about.css">
+    <link rel="stylesheet" href="HOME_TPL_CSS/buttom.css">
+    <link rel="stylesheet" href="HOME_TPL_CSS/top.css">
+
+</head>
+
+<body>
+    <!--头部-->
+    <include file="./Static/head" />
+    <!--首页导航栏-->
+    <include file="./Static/nav" />
+
+    <!-- 内容 区 -->
+    <section class="about-us">
+        <div class="container">
+
+            {$detail.content}
+
+
+
+        </div>
+    </section>
+    <!--底部区-->
+    <include file="./Static/footer" />
+    <!--返回顶部按钮-->
+    <a id="gotop" href="JavaScript:void(0)" class="text-center"><img src="HOME_TPL_IMG/returntop.png" alt=""></a>
+    <script src="HOME_TPL_JS/jquery.min.js"></script>
+    <script src="HOME_TPL_JS/bootstrap.min.js"></script>
+    <script src="HOME_TPL_JS/top.js"></script>
+
+</body>
+
+</html>

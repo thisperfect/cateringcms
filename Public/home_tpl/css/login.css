@@ -1,0 +1,136 @@
+.leading-row>ul>li>ul {
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+.leading-row>ul>li>ul li:hover {
+  background-color: white;
+}
+
+.leading-row>ul>li>ul>li:hover a {
+  color: rgba(253, 70, 62, 1);
+}
+
+.top-bg {
+  position: relative;
+}
+
+.main-nav {
+  position: absolute;
+  bottom: 0:right:0;
+  z-index: 2;
+}
+
+
+/*welcome*/
+
+.welcome {
+  width: 100%;
+  min-height: 650px;
+  background-image: url(../images/banner-bg.png);
+  background-size: 100% 100%;
+  background-repeat: none;
+  background-position: center;
+  position: relative;
+  vertical-align: -5px!important;
+}
+
+.welcomelanding {
+  background: rgba(255, 255, 255, 0.8);
+  width: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding-top: 10px;
+  padding-bottom: 20px;
+  border-radius: 5px;
+}
+
+.welcomelanding h3 {
+  font-weight: 900;
+  text-align: center;
+  margin: 0;
+}
+
+.welcomelanding-padding {
+  width: 80%;
+  padding-right: 10%;
+  padding-left: 10%;
+}
+
+.welcomelanding form {
+  width: 90%;
+}
+
+.welcomelanding .input-group {
+  margin: 30px 0;
+}
+
+.welcomelanding .input-group:nth-child(1) {
+  margin-bottom: 10px;
+}
+
+.welcomelanding form input:nth-child(1),
+.welcomelanding form input:nth-child(2) {
+  width: 100%;
+}
+
+.welcomelanding form input:nth-child(3) {
+  display: block;
+  width: 100%;
+  font-size: 20px;
+  margin-top: 20px;
+}
+
+@media screen and (max-width:415px) {
+  .welcomelanding .input-group {
+    margin: 10px 0;
+  }
+}
+
+hr {
+  border-top: 1px solid #0f0808;
+}
+
+
+/*footer*/
+
+@media screen and (max-width:1024px) {
+  .welcomelanding-padding {
+    width: 90%;
+    padding-right: 5%;
+    padding-left: 5%;
+  }
+  .welcomelanding {
+    background: rgba(255, 255, 255, 0.8);
+    width: 40%;
+    padding-top: 10px;
+    padding-bottom: 20px;
+    border-radius: 5px;
+  }
+}
+
+@media screen and (max-width:768px) {
+  .welcomelanding {
+    background: rgba(255, 255, 255, 0.8);
+    width: 80%;
+    padding-top: 10px;
+    padding-bottom: 20px;
+    border-radius: 5px;
+  }
+}
+
+@media screen and (max-width:415px) {
+  .welcomelanding {
+    background: rgba(255, 255, 255, 0.8);
+    width: 80%;
+    padding-top: 10px;
+    margin-top: 15px;
+    padding-bottom: 20px;
+    border-radius: 5px;
+  }
+  .welcome {
+    width: 100%;
+    min-height: 330px;
+  }
+}

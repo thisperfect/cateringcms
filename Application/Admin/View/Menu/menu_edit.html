@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <title>菜单编辑</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <link rel="shortcut icon" href="{:C('WEB_FAVICON')}">
+    <link href="ADMIN_TPL_CSS/bootstrap.min-v=3.3.6.css" rel="stylesheet">
+    <link href="ADMIN_TPL_CSS/font-awesome.min-v=4.4.0.css" rel="stylesheet">
+    <link href="ADMIN_TPL_CSS/plugins/iCheck/custom.css" rel="stylesheet">
+    <link href="ADMIN_TPL_CSS/animate.min.css" rel="stylesheet">
+    <link href="ADMIN_TPL_CSS/style.min-v=4.1.0.css" rel="stylesheet">
+    <link href="ADMIN_TPL_CSS/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+    <link href="ADMIN_CUS_PLUG/editor/css/wangEditor.min.css" rel="stylesheet">
+    <link href="ADMIN_TPL_CSS/plugins/webuploader/webuploader.css" rel="stylesheet">
+    <link href="ADMIN_CUS_PLUG/webuploader/webuploader.css" rel="stylesheet">
+</head>
+
+<body class="gray-bg">
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-sm-4">
+            <h2>菜单编辑</h2>
+            <ol class="breadcrumb">
+                <li>
+                    <a href="{:U('Menu/index')}">菜单管理</a>
+                </li>
+                <li>
+                    <strong>菜单编辑</strong>
+                </li>
+            </ol>
+        </div>
+    </div>
+
+    <div class="wrapper wrapper-content animated fadeIn">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>基本信息</h5>
+                    </div>
+                    <div class="ibox-content">
+                        <form class="form-horizontal" id="signupForm">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">菜名：</label>
+                                <div class="col-sm-8">
+                                    <input id="name" name="name" class="form-control" type="text" value="{$menu.name}">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">关键词：</label>
+                                <div class="col-sm-8">
+                                    <input id="keyword" name="keyword" class="form-control" type="text" value="{$menu.keyword}">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">描述：</label>
+                                <div class="col-sm-8">
+                                    <input id="description" name="description" class="form-control" type="text" value="{$menu.description}">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">属性：</label>
+                                <div class="col-sm-8">
+                                    <div class="row">
+                                        <div class="col-sm-8">
+                                            <foreach name="property" item="property_v" key="k">
+                                                <label class="checkbox-inline i-checks"><input type="checkbox" value="{$property_v.id}" id="property{$property_V.id}" name="property" <if condition="in_array($property[$k]['id'],$property_ids)">checked</if>>{$property_v.name}</label>
+                                            </foreach>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">口味：</label>
+                                <div class="col-sm-8">
+                                    <div class="row">
+                                        <div class="col-sm-8">
+                                            <foreach name="taste" item="taste_v" key="k">
+                                                <label class="checkbox-inline i-checks"><input type="checkbox" value="{$taste_v.id}" id="taste{$taste_V.id}" name="taste" <if condition="in_array($taste[$k]['id'],$taste_ids)">checked</if>>{$taste_v.name}</label>
+                                            </foreach>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">份量：</label>
+                                <div class="col-sm-8">
+                                    <div class="row">
+                                        <div class="col-sm-8">
+                                            <foreach name="weight" item="weight_v" key="k">
+                                                <label class="checkbox-inline i-checks"><input type="checkbox" value="{$weight_v.id}" id="weight{$weight_V.id}" name="weight" <if condition="in_array($weight[$k]['id'],$weight_ids)">checked</if>>{$weight_v.name}</label>
+                                            </foreach>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">菜品类别:</label>
+                                <div class="col-sm-8">
+                                    <select class="form-control m-b" name="category_id" id="category_id">
+                                        <option value="">请选择菜品类别</option>
+                                        <foreach name="category" item="category">
+                                            <option value="{$category.id}"<eq name="menu.category_id" value="$category.id">selected</eq>>{$category.title}</option>
+                                        </foreach>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">食材类别：</label>
+                                <div class="col-sm-8">
+                                    <select class="form-control m-b" name="material_id" id="material_id">
+                                        <option value="">请选择食材类别：</option>
+                                        <foreach name="material" item="material">
+                                            <option value="{$material.id}"<eq name="menu.material_id" value="$material.id">selected</eq>>{$material.title}</option>
+                                        </foreach>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">详细内容：</label>
+                                <div class="col-sm-8">
+                                    <textarea id="content" name="content" class="form-control">{$menu.content}</textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">特色图片：</label>
+                                <div class="col-sm-8">
+                                    <notempty name="menu.picurl">
+                                        <div id="favicon">
+                                            <img src="{$menu.picurl}" alt="特色图" width="64" height="64">
+                                        </div>
+                                        <div id="hr" class="hr-line-dashed"></div>
+                                    </notempty>
+                                    <div id="uploader">
+                                        <div id="fileList" class="uploader-list"></div>
+                                        <div id="filePicker">选择图片</div>
+                                    </div>
+                                    <input type="hidden" class="form-control" id="picurl" name="picurl" value="{$menu.picurl}">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">单价：</label>
+                                <div class="col-sm-8">
+                                    <input id="price" name="price" class="form-control" type="text" value="{$menu.price}">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">上架状态：</label>
+                                <div class="col-sm-8">
+                                    <label class="radio-inline i-checks"><input type="radio" value="1" id="checkinfo1" name="checkinfo"<eq name="menu.checkinfo" value="1">checked</eq>>是</label>
+                                    <label class="radio-inline i-checks"><input type="radio" value="0" id="checkinfo0" name="checkinfo"<eq name="menu.checkinfo" value="0">checked</eq>>否</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-8 col-sm-offset-3">
+                                    <button class="btn btn-primary" onclick="edit_menu()">提交</button>
+                                    <a class="btn btn-white"  onclick="javascript:history.back(-1);">取消</a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="ADMIN_TPL_JS/jquery.min-v=2.1.4.js"></script>
+    <script src="ADMIN_TPL_JS/bootstrap.min-v=3.3.6.js"></script>
+    <script src="ADMIN_TPL_JS/plugins/iCheck/icheck.min.js"></script>
+    <script src="ADMIN_TPL_JS/plugins/validate/jquery.validate.min.js"></script>
+    <script src="ADMIN_TPL_JS/plugins/validate/messages_zh.min.js"></script>
+    <script src="ADMIN_TPL_JS/plugins/sweetalert/sweetalert.min.js"></script>
+    <script src="ADMIN_CUS_PLUG/editor/js/wangEditor.min.js"></script>
+    <script src="ADMIN_CUS_PLUG/editor/plupload/plupload.full.min.js"></script>
+    <script src="ADMIN_TPL_JS/plugins/webuploader/webuploader.min.js"></script>
+    <script>
+        var edit_menu_url = "{:U('Menu/menu_edit?mid='.$menu['id'])}";
+        var manageMenu = "{:U('Menu/index')}";
+        var uploadUrl = "{:U('Upload/upload_file')}"
+        $(document).ready(function () {
+            $(".i-checks").iCheck({
+                checkboxClass: "icheckbox_square-green",
+                radioClass: "iradio_square-green",
+            });
+            $("div#filePicker").click(function () {
+                $("div#favicon,div#hr").remove();
+            });
+        });
+    </script>
+    <script src="ADMIN_CUS_PLUG/editor/conf.js"></script>
+    <script src="ADMIN_CUS_PLUG/webuploader/webuploader.other.js"></script>
+    <script src="ADMIN_CUS_JS/menu/validator.menu.js"></script>
+    <script src="ADMIN_CUS_JS/menu/menu.js"></script>
+</body>
+
+</html>

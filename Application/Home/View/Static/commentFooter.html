@@ -1,0 +1,54 @@
+<footer>
+    <empty name="Think.session.user">
+        <div class="reply-form" id="commentReplyForm">
+            <a href="javascript:void(0)" class="avatar"><img src="HOME_TPL_IMG/default.jpg" alt=""></a>
+            <form class="form" action="{:U('Menu/comment')}" method="post" id="commentForm">
+                <div class="form-group">
+                    <textarea class="form-control new-comment-text validate[required,minSize[4],maxSize[200]]" rows="2" placeholder="撰写评论..."
+                        id="content" name="content"></textarea>
+                </div>
+                <div class="form-group comment-user">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <span class="pull-right">或者</span>
+                            <a href="{:U('User/login')}" class="btn btn-danger">登录</a> &nbsp;<a href="{:U('User/register')}"
+                                class="btn btn-danger">注册</a>
+                        </div>
+                        <div class="col-md-7">
+                            <div class=" form-group">
+                                <input type="text" class="form-control validate[required,minSize[4],maxSize[20]]" id="nameInputEmail1" placeholder="输入评论显示名称"
+                                    name="name">
+                            </div>
+                            <div class="form-group">
+                                <input type="email" class="form-control validate[required,custom[email]]" id="exampleInputEmail1" placeholder="输入电子邮件（不会在评论显示）"
+                                    name="email">
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <input type="hidden" name="menu_id" value="{$menu.id}">
+                            <input type="hidden" name="parent_id" value="0"><button type="submit" class="btn btn-block btn-danger"><i class="icon-ok"></i>&nbsp;发布</button></div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <else />
+        <div class="reply-form" id="commentReplyForm">
+            <a href="javascript:void(0)" class="avatar"><img src="{$Think.session.user.head|default='HOME_TPL_IMG/default.jpg'}" alt="{$Think.session.user.name}"></a>
+            <form class="form" action="{:U('Menu/comment')}" method="post" id="commentForm">
+                <div class="form-group">
+                    <textarea class="form-control new-comment-text validate[required,minSize[4],maxSize[200]]" rows="2" placeholder="撰写评论..."
+                        id="content" name="content" required></textarea>
+                </div>
+                <div class="form-group comment-user">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <input type="hidden" name="menu_id" value="{$menu.id}">
+                            <input type="hidden" name="parent_id" value="0">
+                            <button type="submit" class="btn btn-block btn-danger"><i class="icon-ok"></i>&nbsp;发布</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </empty>
+</footer>

@@ -1,0 +1,254 @@
+                                    /*center*/
+
+                                .setup {
+                                    min-height: 200px;
+                                    background-color: #f5f5f5;
+                                }
+
+                                .setup-left {
+                                    width: 20%;
+                                    float: left;
+                                }
+
+                                .setup-left h4 {
+                                    margin: 5px 0;
+                                    font-weight: 900;
+                                }
+
+                                .setup-left>ul {
+                                    padding-left: 6px;
+                                    margin-top: 20px;
+                                }
+
+                                .setup-left>ul>li>ul {
+                                    padding-left: 20px;
+                                }
+
+                                .setup-right {
+                                    width: 80%;
+                                    float: right;
+                                    background-color: white;
+                                    padding-top: 10px;
+                                    padding: 15px 1%;
+                                }
+
+                                table {
+                                    width: 100%;
+                                }
+
+                                label {
+                                    width: 100%;
+                                }
+
+                                a {
+                                    color: gray;
+                                    text-decoration: none;
+                                }
+
+                                td {
+                                    border: 1px solid #ddd;
+                                }
+
+                                .table>thead>tr>th {
+                                    text-align: center;
+                                    vertical-align: middle;
+                                }
+
+                                .table>tbody>tr>td {
+                                    text-align: center;
+                                    line-height: 20px;
+                                    vertical-align: middle;
+                                    border-top: 1px solid #ddd;
+                                }
+
+                                .table>thead>tr>th {
+                                    border-bottom: 1px solid #ddd;
+                                }
+
+                                #table tr td .btn {
+                                    margin: 0 5px;
+                                }
+
+                                @media screen and (max-width:1024px) {}
+
+                                @media screen and (max-width:768px) {
+                                    .headpicture img {
+                                        width: 50%;
+                                        height: 289px;
+                                    }
+                                    .setup-left {
+                                        width: 15%;
+                                        float: left;
+                                    }
+                                    .setup-left>ul {
+                                        padding-left: 0;
+                                    }
+                                    .setup-right {
+                                        width: 85%;
+                                        float: right;
+                                        background-color: white;
+                                        padding-left: 23
+                                    }
+                                    .setup-left>ul>li>ul {
+                                        padding-left: 0;
+                                    }
+                                    h3,
+                                    h4 {
+                                        font-size: 10px;
+                                        margin: 3px 0;
+                                    }
+                                    h4>a,
+                                    h3>a {
+                                        font-size: 10px
+                                    }
+                                    .btn {
+                                        margin: 0 5px;
+                                    }
+                                }
+
+                                @media screen and (max-width:415px) {
+                                    .headpicture img {
+                                        width: 50%;
+                                        height: 156px;
+                                    }
+                                    .setup-left {
+                                        width: 15%;
+                                        float: left;
+                                    }
+                                    .setup-left h3 {
+                                        font-size: 12px;
+                                    }
+                                    .setup-left>ul {
+                                        padding-left: 0;
+                                    }
+                                    .setup-left ul {
+                                        padding-left: 5px;
+                                        font-size: 10px;
+                                    }
+                                    .setup-right {
+                                        width: 85%;
+                                        float: right;
+                                        background-color: white;
+                                        padding-top: 10px padding-left: 2%;
+                                    }
+                                    .container {
+                                        padding: 0 5px;
+                                    }
+                                    .table tr th:nthh-child(1) {
+                                        width: 10px;
+                                    }
+                                    .table>thead>tr>th:nth-child(1) {
+                                        width: 10px;
+                                    }
+                                    .table>thead>tr,
+                                    .table>tfoot>tr th {
+                                        font-size: 12px;
+                                        text-align: center;
+                                    }
+                                    .table>tbody>tr>td,
+                                    .table>tbody>tr>th,
+                                    .table>tfoot>tr>td,
+                                    .table>tfoot>tr>th,
+                                    .table>thead>tr>td,
+                                    .table>thead>tr>th {
+                                        padding: 2px!important;
+                                    }
+                                    .table>tbody>tr>td {
+                                        font-size: 10px;
+                                        text-align: center;
+                                    }
+                                    .table>tbody>tr>td {
+                                        line-height: 15px;
+                                    }
+                                    table tr>td input[type=checkbox],
+                                    table tr>td input[type=radio] {
+                                        margin: 17px 0 0 0;
+                                        display: block;
+                                    }
+                                    .pagination {
+                                        margin: 10px 0;
+                                        border-radius: 4px;
+                                    }
+                                    .pagination li a {
+                                        font-size: 12px;
+                                    }
+                                    .form-control {
+                                        width: 75%!important;
+                                        height: 28px;
+                                        font-size: 14px;
+                                    }
+                                    .btn {
+                                        margin: 2px 2px;
+                                        padding: 3px 6px;
+                                        font-size: 10px;
+                                        border-radius: 2px;
+                                    }
+                                    #table thead tr th:nth-child(5) {
+                                        width: 50px;
+                                    }
+                                    @media screen and (max-width:376px) {
+                                        .headpicture img {
+                                            width: 50%;
+                                            height: 153px;
+                                        }
+                                        .setup-left {
+                                            width: 15%;
+                                            float: left;
+                                            padding-top: 10px;
+                                        }
+                                        .setup-left h3 {
+                                            font-size: 12px;
+                                        }
+                                        .setup-left ul:nth-child(1) {
+                                            padding-left: 0;
+                                        }
+                                        .setup-left ul:nth-child(2) {
+                                            padding-left: 1px;
+                                            font-size: 10px;
+                                        }
+                                        .setup-right {
+                                            width: 85%;
+                                            float: right;
+                                            background-color: white;
+                                            padding-top: 10px;
+                                            padding-left: 0;
+                                        }
+                                    }
+                                    @media screen and (max-width:320px) {
+                                        .headpicture img {
+                                            width: 50%;
+                                            height: 115px;
+                                        }
+                                        .setup-left {
+                                            width: 16%;
+                                            float: left;
+                                            padding-top: 0;
+                                            margin-top: 10px;
+                                        }
+                                        .setup-left h3 {
+                                            font-size: 12px;
+                                        }
+                                        .setup-left ul:nth-child(1) {
+                                            padding-left: 0;
+                                        }
+                                        .setup-left ul:nth-child(2) {
+                                            padding-left: 1px;
+                                            font-size: 10px;
+                                        }
+                                        .setup-right {
+                                            width: 84%;
+                                            float: right;
+                                            background-color: white;
+                                            padding-top: 5px;
+                                            padding-left: 2%
+                                        }
+                                        input {
+                                            padding: 1px 3px;
+                                        }
+                                        .btn {
+                                            padding: 3px 3px;
+                                        }
+                                        .table>tbody>tr>td {
+                                            font-size: 10px;
+                                        }
+                                    }

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <title>菜谱类别管理</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+
+    <link rel="shortcut icon" href="{:C('WEB_FAVICON')}">
+    <link href="ADMIN_TPL_CSS/bootstrap.min-v=3.3.6.css" rel="stylesheet">
+    <link href="ADMIN_TPL_CSS/font-awesome.min-v=4.4.0.css" rel="stylesheet">
+    <link href="ADMIN_TPL_CSS/animate.min.css" rel="stylesheet">
+    <link href="ADMIN_TPL_CSS/style.min-v=4.1.0.css" rel="stylesheet">
+    <link href="ADMIN_TPL_CSS/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet">
+    <link href="ADMIN_TPL_CSS/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+
+</head>
+
+<body class="gray-bg">
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-sm-4">
+            <h2>菜谱类别管理</h2>
+        </div>
+        <div class="col-sm-8">
+            <div class="title-action">
+                <a data-toggle="modal" class="btn btn-primary" href="#modal-form">添加菜谱类别</a>
+            </div>
+        </div>
+    </div>
+    <div class="wrapper wrapper-content animated fadeInDown">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>菜谱类别列表</h5>
+                    </div>
+                    <div class="ibox-content">
+                        <table class="table table-striped table-bordered table-hover dataTables-example" id="categorymanage">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>菜谱类别名称</th>
+                                    <th>修改</th>
+                                    <th>删除</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <foreach name="category" item="category">
+                                    <tr class="gradeA category">
+                                        <td><input type="checkbox" name="cid" value="{$category.id}">&nbsp;&nbsp;&nbsp;{$category.id}</td>
+                                        <td>{$category.title}</td>
+                                        <td>
+                                            <a href="{:U('Category/Category_edit?cid='.$category['id'])}" class="btn btn-primary">修改</a>
+                                        </td>
+                                        <td>
+                                            <a href="javascript:void(0)" onclick="del_category('{$category.id}',{$key})" class="btn btn-danger">删除</a>
+                                        </td>
+                                    </tr>
+                                </foreach>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>菜谱类别名称</th>
+                                    <th>修改</th>
+                                    <th>删除</th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                        <a href="javascript:void(0)" class="btn btn-primary" onclick="select_all_category()">全选</a>
+                        <a href="javascript:void(0)" class="btn btn-primary" onclick="select_empty_category()">全不选</a>
+                        <a href="javascript:void(0)" class="btn btn-primary" onclick="select_reverse_category()">反选</a>
+                        <a href="javascript:void(0)" class="btn btn-danger" onclick="multi_del_category()">删除选定</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="modal-form" class="modal fade" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <h3 class="m-t-none m-b">菜谱类别添加</h3>
+                            <p>基本信息</p>
+                            <form role="form" id="signupForm">
+                                <div class="form-group">
+                                    <label class="control-label">菜谱类别名称：</label>
+                                    <input type="text" id="title" name="title" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">关键词：</label>
+                                    <input type="text" id="keyword" name="keyword" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">描述：</label>
+                                    <input type="text" id="description" name="description" class="form-control">
+                                </div>
+                                <div>
+                                    <button class="btn btn-sm btn-primary pull-right m-t-n-xs" onclick="add_category()"><strong>提交</strong>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="ADMIN_TPL_JS/jquery.min-v=2.1.4.js"></script>
+    <script src="ADMIN_TPL_JS/bootstrap.min-v=3.3.6.js"></script>
+    <script src="ADMIN_TPL_JS/plugins/dataTables/jquery.dataTables.js"></script>
+    <script src="ADMIN_TPL_JS/plugins/dataTables/dataTables.bootstrap.js"></script>
+    <script src="ADMIN_TPL_JS/plugins/sweetalert/sweetalert.min.js"></script>
+    <script>
+        var del_category_url = "{:U('Category/category_del')}";
+        var addCategory = "{:U('Category/category_add')}";
+        var manageCategory = "{:U('Category/index')}";
+        $(document).ready(function () {
+            $(".dataTables-example").dataTable();
+        });
+    </script>
+    <script src="ADMIN_CUS_JS/category/category.js"></script>
+    <script src="ADMIN_CUS_JS/category/validator.category.js"></script>
+</body>
+
+</html>

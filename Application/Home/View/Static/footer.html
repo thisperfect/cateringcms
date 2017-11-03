@@ -1,0 +1,27 @@
+<!-- 底部区 -->
+<section class="footer">
+    <div class="container">
+        <div class="foot-logo-area clearfix">
+            <div class="clearfix"><img class="foot-logo" src="HOME_TPL_IMG/foot-logo.png" alt=""></div>
+            <div class="clearfix">
+                <ul>
+                    <li class="text-center"><a href=""><span>多</span>份量多,菜品全</a></li>
+                    <li><a href=""><span>快</span>做的快,上菜快</a></li>
+                    <li><a href=""><span>好</span>环境好,服务好</a></li>
+                </ul>
+            </div class="clearfix">
+            <div class="pr-m">
+                <img src="HOME_TPL_IMG/pr-m.png" alt="">
+            </div>
+        </div>
+        <ul class="about clearfix">
+            <foreach name="weblink" item="v">
+                <li><a href="//{$v.linkurl}" taget="_blank">{$v.webname}</a></li>
+            </foreach>
+        </ul>
+        <div class="Copyright text-center">
+            <p>{:C('COPYRIGHT_INFO')}</p>
+            <p>{:C('WEB_ICP_NUMBER')}</p>
+        </div>
+    </div>
+</section>

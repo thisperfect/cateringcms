@@ -1,0 +1,97 @@
+<!DOCTYPE>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>购物车</title>
+    <meta name="keywords" content="{:C('WEB_KEYWORDS')}">
+    <meta name="description" content="{:C('WEB_DESCRIPTION')}">
+    <link rel="shortcut icon" href="{:C('WEB_FAVICON')}">
+    <link rel="stylesheet" href="HOME_TPL_CSS/bootstrap.min.css">
+    <link rel="stylesheet" href="HOME_TPL_CSS/header.css">
+    <link rel="stylesheet" href="HOME_TPL_CSS/buttom.css">
+    <link rel="stylesheet" href="HOME_TPL_CSS/cart1.css">
+    <link rel="stylesheet" href="HOME_TPL_CSS/top.css">
+    <link href="//cdn.bootcss.com/sweetalert/1.1.3/sweetalert.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <!--头部-->
+    <include file="./Static/head" />
+    <!--首页导航栏-->
+    <include file="./Static/nav" />
+
+    <!--  -->
+    <section>
+        <div class="container clearfix">
+            <div id="content">
+                <table id="shopping">
+                    <form action="" method="post" name="myform">
+                        <tr>
+                            <td class="title_1"><input id="allCheckBox" type="checkbox" value="" onclick="selectAll()" />全选</td>
+                            <td class="title_2" colspan="2">美味宝贝</td>
+                            <td class="title_3">获积分</td>
+                            <td class="title_4">单价(元)</td>
+                            <td class="title_5">数量</td>
+                            <td class="title_6">小计(元)</td>
+                            <td class="title_7">操作</td>
+                        </tr>
+                        <tr>
+                            <td colspan="8" class="line"></td>
+                        </tr>
+                        <tr>
+
+                            <foreach name="cart" item="data" key="k">
+                                <tr></tr>
+                                <tr id="product{$k+1}" class="cartDiv">
+                                    <td class="cart_td_1"><input name="cartCheckBox" type="checkbox" value="product{$k+1}" onclick="selectSingle()"
+                                        /><input type="hidden" name="cart_id" value="{$data.id}"></td>
+                                    <td class="cart_td_2"><img src="{$data.img}" alt="shopping" width="64px" height="64px" /></td>
+                                    <td class="cart_td_3"><a href="#">{$data.name}</a></td>
+                                    <td class="cart_td_4"></td>
+                                    <td class="cart_td_5">{$data.price}</td>
+                                    <td class="cart_td_6"><img src="HOME_TPL_IMG/shangpinxiangqing/jian.png" alt="minus" onclick="changeNum('{$data.id}','num_{$k+1}','minus')"
+                                            class="hand" /><input id="num_{$k+1}" type="text" value="{$data.num}" class="num_input"
+                                            readonly="readonly" /><img src="HOME_TPL_IMG/shangpinxiangqing/jia.png" alt="add"
+                                            onclick="changeNum('{$data.id}','num_{$k+1}','add')" class="hand" /></td>
+                                    <td class="cart_td_7"></td>
+                                    <td class="cart_td_8"><a href="javascript:deleteRow('{$data.id}','product{$k+1}');">删除</a></td>
+                                </tr>
+
+                            </foreach>
+                            <tr class="tr-1">
+                                <td colspan="3">
+                                    <a class="btn btn-danger" href="javascript:deleteSelectRow()">删除</a>
+                                </td>
+                                <td colspan="5" class="shopend">商品总价（不含运费）：<label id="total" class="yellow"></label> 元<br /> 可获积分 <label class="yellow" id="integral"></label>                                    点<br />
+                                    <a class="btn btn-primary" href="{:U('Good/order?action='.$action.'&token='.$token)}">提交订单</a>
+                                    <a class="btn btn-danger" href="javascript:clearCart()">清空购物车</a>
+                                </td>
+                            </tr>
+                    </form>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!--底部区-->
+    <include file="./Static/footer" />
+    <!--返回顶部按钮-->
+    <a id="gotop" href="JavaScript:void(0)" class="text-center"><img src="HOME_TPL_IMG/returntop.png" alt=""></a>
+    <script src="HOME_TPL_JS/jquery.min.js"></script>
+    <script src="HOME_TPL_JS/bootstrap.min.js"></script>
+    <script src="HOME_TPL_JS/top.js"></script>
+    <script src="//cdn.bootcss.com/sweetalert/1.1.3/sweetalert.min.js"></script>
+    <script>
+        var inc_num_url = "{:U('Cart/incNum')}";
+        var dec_num_url = "{:U('Cart/decNum')}";
+        var del_item_url = "{:U('Cart/delItem')}";
+        var clear_cart_url = "{:U('Cart/clearCart')}";
+    </script>
+    <script src="HOME_TPL_JS/cart.js"></script>
+
+</body>
+
+</html>

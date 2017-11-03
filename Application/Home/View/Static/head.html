@@ -1,0 +1,28 @@
+<section>
+    <div class="top-bg clearfix" id="top">
+        <div class="container clearfix">
+            <div class="tel">
+                <img src="HOME_TPL_IMG/tel.png" alt="">&nbsp;
+                <span>{:C('WEB_NUM')}</span>
+            </div>
+            <empty name="Think.session.user">
+                <!--登录注册个人中心-->
+                <div class="login clearfix">
+                    <ul>
+                        <li><a target="blank" href="{:U('User/login')}">登录</a></li>
+                        <li><a target="blank" href="{:U('User/register')}">注册</a></li>
+                        <li><a target="style=" color:white; ""="blank" href="{:U('Good/cart')}">我的购物车</a></li>
+                    </ul>
+                </div>
+                <else />
+                <div class="login clearfix">
+                    <ul>
+                        <li><a target="blank" href="{:U('ClientCenter/index')}">{$Think.session.user.name}</a></li>
+                        <li><a target="blank" href="{:U('User/Logout')}">退出</a></li>
+                        <li><a target="style=" color:white; ""="blank" href="{:U('Good/cart')}">我的购物车</a></li>
+                    </ul>
+                </div>
+            </empty>
+        </div>
+    </div>
+</section>

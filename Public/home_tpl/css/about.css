@@ -1,0 +1,40 @@
+   
+/*about*/
+.about-us{
+  padding-top:50px;
+  padding-bottom:30px;
+}
+.about-us .about-us-first{
+  border-bottom: solid 1px #d8d8d8;
+}
+.about-us h3,.about-us h4{
+  color:#5b0500;
+}
+.about-us h3{
+  margin-top:60px;
+}
+.about-us a{
+  font-size:large;
+  line-height:20px;
+  color:#5b0500;
+}
+.about-us .about-us-second{
+  padding-top:15px;
+  font-family:"宋体";
+}
+.about-us .about-us-third{
+  padding-top:20px;
+  font-family:"宋体";
+}
+.about-us .about-us-third p{
+  margin-left:5%;
+}
+ @media screen and (max-width:769px){
+        .about-us h3,.about-us strong{font-size:12px;}
+        .about-us p{font-size:8px;}
+        .about-us h3{margin-top:20;}
+    }
+     @media screen and (max-width:415px){
+     .about-us h3{margin-top:10px;}
+     }
+

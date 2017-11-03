@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <title>口味属性编辑</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <link rel="shortcut icon" href="{:C('WEB_FAVICON')}">
+    <link href="ADMIN_TPL_CSS/bootstrap.min-v=3.3.6.css" rel="stylesheet">
+    <link href="ADMIN_TPL_CSS/font-awesome.min-v=4.4.0.css" rel="stylesheet">
+    <link href="ADMIN_TPL_CSS/plugins/iCheck/custom.css" rel="stylesheet">
+    <link href="ADMIN_TPL_CSS/animate.min.css" rel="stylesheet">
+    <link href="ADMIN_TPL_CSS/style.min-v=4.1.0.css" rel="stylesheet">
+    <link href="ADMIN_TPL_CSS/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+</head>
+
+<body class="gray-bg">
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-sm-4">
+            <h2>口味属性编辑</h2>
+            <ol class="breadcrumb">
+                <li>
+                    <a href="{:U('taste/index')}">口味属性管理</a>
+                </li>
+                <li>
+                    <strong>口味属性编辑</strong>
+                </li>
+            </ol>
+        </div>
+    </div>
+    <div class="wrapper wrapper-content animated fadeIn">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>基本信息</h5>
+                    </div>
+                    <div class="ibox-content">
+                        <form class="form-horizontal" id="signupForm">
+                            <div class="form-group">
+                                <label class="control-label col-sm-3">属性名称：</label>
+                                <div class="col-sm-8">
+                                    <input type="text" id="name" name="name" class="form-control" value="{$taste.name}">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-3">关键词：</label>
+                                <div class="col-sm-8">
+                                    <input type="text" id="keyword" name="keyword" class="form-control" value="{$taste.keyword}">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-3">描述：</label>
+                                <div class="col-sm-8">
+                                    <input type="text" id="description" name="description" class="form-control" value="{$taste.description}">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-8 col-sm-offset-3">
+                                    <button class="btn btn-primary" onclick="edit_taste()">提交</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="ADMIN_TPL_JS/jquery.min-v=2.1.4.js"></script>
+    <script src="ADMIN_TPL_JS/bootstrap.min-v=3.3.6.js"></script>
+    <script src="ADMIN_TPL_JS/plugins/iCheck/icheck.min.js"></script>
+    <script src="ADMIN_TPL_JS/plugins/validate/jquery.validate.min.js"></script>
+    <script src="ADMIN_TPL_JS/plugins/validate/messages_zh.min.js"></script>
+    <script src="ADMIN_TPL_JS/plugins/sweetalert/sweetalert.min.js"></script>
+    <script>
+        var edit_taste_url = "{:U('taste/taste_edit?tid='.$taste['id'])}";
+        var managetaste = "{:U('taste/index')}";
+        $(document).ready(function() {
+            $(".i-checks").iCheck({
+                checkboxClass: "icheckbox_square-green",
+                radioClass: "iradio_square-green",
+            });
+        });
+    </script>
+    <script src="ADMIN_CUS_JS/taste/validator.taste.js"></script>
+    <script src="ADMIN_CUS_JS/taste/taste.js"></script>
+</body>
+
+</html>

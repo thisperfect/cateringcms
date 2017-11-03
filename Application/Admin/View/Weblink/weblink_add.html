@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <title>友情链接添加</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <link rel="shortcut icon" href="{:C('WEB_FAVICON')}">
+    <link href="ADMIN_TPL_CSS/bootstrap.min-v=3.3.6.css" rel="stylesheet">
+    <link href="ADMIN_TPL_CSS/font-awesome.min-v=4.4.0.css" rel="stylesheet">
+    <link href="ADMIN_TPL_CSS/plugins/iCheck/custom.css" rel="stylesheet">
+    <link href="ADMIN_TPL_CSS/animate.min.css" rel="stylesheet">
+    <link href="ADMIN_TPL_CSS/style.min-v=4.1.0.css" rel="stylesheet">
+    <link href="ADMIN_TPL_CSS/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+    <link href="ADMIN_TPL_CSS/plugins/webuploader/webuploader.css" rel="stylesheet">
+    <link href="ADMIN_CUS_PLUG/webuploader/webuploader.css" rel="stylesheet">
+</head>
+
+<body class="gray-bg">
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-sm-4">
+            <h2>友情链接添加</h2>
+            <ol class="breadcrumb">
+                <li>
+                    <a href="{:U('Weblink/index')}">友情链接管理</a>
+                </li>
+                <li>
+                    <strong>友情链接添加</strong>
+                </li>
+            </ol>
+        </div>
+    </div>
+    <div class="wrapper wrapper-content animated fadeInDown">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h3>基本信息</h3>
+                    </div>
+                    <div class="ibox-content">
+                        <form class="form-horizontal" id="signupForm">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">友情链接名称：</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" id="webname" name="webname">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">友情链接图标：</label>
+                                <div class="col-sm-8">
+                                    <div id="uploader">
+                                        <div id="fileList" class="uploader-list"></div>
+                                        <div id="filePicker">选择图片</div>
+                                    </div>
+                                    <input type="hidden" class="form-control" id="picurl" name="picurl">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">友情链接地址：</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" id="linkurl" name="linkurl" value="{$weblink.linkurl}">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">友情链接描述：</label>
+                                <div class="col-sm-8">
+                                    <textarea class="form-control" id="webnote" name="webnote"></textarea>
+                                </div>
+                            </div>
+                            <div class=" form-group ">
+                                <label class="col-sm-3 control-label">显示状态：</label>
+                                <div class="col-sm-8">
+                                    <label class="radio-inline i-checks"><input type="radio" value="0" id="checkinfo1" name="checkinfo" >显示</label>
+                                    <label class="radio-inline i-checks"><input type="radio" value="1" id="checkinfo2" name="checkinfo" >隐藏</label>
+                                </div>
+                            </div>
+                            <div class="form-group ">
+                                <div class="col-sm-8 col-sm-offset-3 ">
+                                    <button class="btn btn-primary" onclick="add_weblink()">提交</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="ADMIN_TPL_JS/jquery.min-v=2.1.4.js "></script>
+    <script src="ADMIN_TPL_JS/bootstrap.min-v=3.3.6.js "></script>
+    <script src="ADMIN_TPL_JS/plugins/validate/jquery.validate.min.js"></script>
+    <script src="ADMIN_TPL_JS/plugins/validate/messages_zh.min.js"></script>
+    <script src="ADMIN_TPL_JS/plugins/iCheck/icheck.min.js "></script>
+    <script src="ADMIN_TPL_JS/plugins/sweetalert/sweetalert.min.js "></script>
+    <script src="ADMIN_TPL_JS/plugins/webuploader/webuploader.min.js"></script>
+    <script>
+        var add_weblink_url = "{:U('Weblink/weblink_add')}";
+        var manageWeblink = "{:U('Weblink/index')}";
+        var uploadUrl = "{:U('Upload/upload_file')}";
+        $(document).ready(function() {
+            $(".i-checks ").iCheck({
+                checkboxClass: "icheckbox_square-green ",
+                radioClass: "iradio_square-green ",
+            });
+            $("div#filePicker").click(function() {
+                $("div#favicon,div#hr").remove();
+            });
+        });
+    </script>
+    <script src="ADMIN_CUS_PLUG/webuploader/webuploader.other.js"></script>
+    <script src="ADMIN_CUS_JS/weblink/validator.weblink.js "></script>
+    <script src="ADMIN_CUS_JS/weblink/weblink.js "></script>
+
+</body>
+
+</html>

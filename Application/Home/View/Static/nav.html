@@ -1,0 +1,25 @@
+<section>
+    <!--首页导航栏-->
+    <div class="main-nav">
+        <div class="container" class="clearfix">
+            <div class="leading-row clearfix">
+                <ul class="clearfix text-center">
+                    <li><a href="{:U('Index/index')}">首页</a></li>
+                    <li><a href="{:U('Menu/show?flag=0')}">菜肴展示</a></li>
+                    <li><a href="{:U('Menu/todayRec')}">今日热荐</a></li>
+                    <li><a href="{:U('Menu/newSale')}">新品上市</a></li>
+                    <li><a href="{:U('Page/chef')}">厨师介绍</a></li>
+                    <li><a target="blank" href="javascript:void(0)">关于我们</a>&nbsp;<span class="glyphicon glyphicon-triangle-bottom"></span>
+                        <ul class="clearfix">
+                            <foreach name="navpage" item="p">
+                                <li><a href="{:U('Page/index?id='.$p['id'])}">{$p.title}</a></li>
+                            </foreach>
+                        </ul>
+
+                    </li>
+                    <li><a href="{:U('Page/message')}">站点留言</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>

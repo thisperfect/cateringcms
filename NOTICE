@@ -1,0 +1,28 @@
+通知页面：（尽量不要更改）
+git 顺序
+首先更改文件
+git status //查看更改的文件，红色代表文件未add
+git add 路径或者文件名
+git status //查看更改的文件，绿色代表add成功
+git commit -m "显示提交的更改信息"
+git push 
+拉取更新
+git pull
+开发规范：
+1.语言要规范，语义化
+2.代码对齐
+
+通知：
+1.大家重新导入一下数据库文件，部分字段可能更改，及时修改
+2.大家  C:\Users\WangNingkai\.ssh\id_rsa.pub这文件发给我 备注姓名
+没有的话通过 ssh-keygen -t rsa -C "邮箱地址" 创建
+按照这个链接地址来
+https://gist.github.com/yisibl/8019693
+3.执行自动跳转用这个函数，延迟两秒跳转
+setTimeout(function() { location.reload() }, 2000);
+4.
+前台页面
+http://localhost/cateringcms/home
+后台页面
+http://localhost/cateringcms/admin
+5.php版本统一为5.5

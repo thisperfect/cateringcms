@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>个人中心</title>
+    <meta name="keywords" content="{:C('WEB_KEYWORDS')}">
+    <meta name="description" content="{:C('WEB_DESCRIPTION')}">
+    <link rel="shortcut icon" href="{:C('WEB_FAVICON')}">
+    <link rel="stylesheet" href="HOME_TPL_CSS/bootstrap.min.css">
+    <link rel="stylesheet" href="HOME_TPL_CSS/header.css">
+    <link rel="stylesheet" href="HOME_TPL_CSS/personalcenter.css">
+    <link rel="stylesheet" href="HOME_TPL_CSS/top.css">
+    <link rel="stylesheet" href="HOME_TPL_CSS/buttom.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/flatpickr/3.0.0/flatpickr.css">
+    <link href="//cdn.bootcss.com/sweetalert/1.1.3/sweetalert.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="HOME_TPL_CSS/city-picker.css" />
+    <link rel="stylesheet" href="HOME_TPL_CSS/validationEngine.jquery.css">
+
+</head>
+
+<body>
+    <!--头部-->
+    <include file="./Static/head" />
+    <!--首页导航栏-->
+    <include file="./Static/nav" />
+
+    <section>
+        <div class="setup">
+            <div class="container">
+                <!--个人中心侧边栏-->
+                <include file="./Static/clientNav" />
+                <div class="setup-right">
+                    <div class="basenformation">
+                        <div class="headpicture">
+                            <img class="img-responsive img-circle img-thumbnail" src="{$user.head|default='HOME_TPL_IMG/no-img.jpg'}" alt="">
+                            <div>
+                                <p> <strong>用户名：</strong><span>{$Think.session.user.name}</span></p>
+                                <p><strong>积分：</strong><span>{$user.points}</span>&nbsp;&nbsp;&nbsp;<strong>会员类型：</strong><span>{$Think.session.user.group}</span></p>
+                            </div>
+                        </div>
+                        <hr/>
+                        <form action="{:U( 'ClientCenter/editData?uid='.$_SESSION['user'][ 'uid'])}" method="post" id="userData">
+                            <div class="form-group">
+                                <label class="control-label">用户名:</label><input type="text" name="uname" value="{$user.uname}"
+                                    class="form-control validate[required,minSize[6],maxSize[15],custom[onlyLetterNumber]]">
+                            </div>
+                            <div class=" form-group">
+                                <label class="control-label">真实姓名:</label><input type="text" name="name" value="{$user.name}"
+                                    class="form-control validate[minSize[2],maxSize[20]]">
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">性别：</label>
+                                <input type="radio" name="sex" value="1" <eq name="user.sex" value="1">checked</eq>>男&nbsp;&nbsp;&nbsp;
+                                <input type="radio" name="sex" value="0" <eq name="user.sex" value="0">checked</eq>>女&nbsp;&nbsp;&nbsp;
+                                <input type="radio" name="sex" value="2" <eq name="user.sex" value="2">checked</eq>>保密
+                            </div class="form-group">
+                            <div class="form-group">
+                                <label class="control-label">电话:</label><input type="text" name="telephone" value="{$user.telephone}"
+                                    class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">住址:</label>
+                                <div style="position: relative;"><input type="text" id="address" name="address" value="{$user.address}" class="form-control"
+                                        data-toggle="city-picker">
+                                </div>
+                                <input type="text" name="address_detail" class="form-control" placeholder="请输入详细住址" value="{$user.address_detail}">
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label">邮箱:</label><input type="text" name="email" value="{$user.email}"
+                                    class="form-control validate[required,custom[email]]">
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">生日:</label><input type="text" name="birth" value="{$user.birth|date='Y-m-d' ,###}"
+                                    class="form-control flatpickr">
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary">提交</button>
+                                <a class="btn btn-primary" href="#resetPassModal" data-toggle="modal" data-target="#resetPassModal">更改密码</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div id="resetPassModal" class="modal fade" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="ibox">
+                        <div class="ibox-title">
+                            <h4>更改密码</h4>
+                        </div>
+                        <div class="ibox-content">
+                            <form role="form" action="{:U( 'ClientCenter/resetPass')}" method="post" id="resetForm">
+                                <div class="form-group">
+                                    <label class="control-label">原密码：</label>
+                                    <input type="password" id="oldPass" name="old_password" class="form-control validate[required]" placeholder="请输入原密码">
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">新密码：</label>
+                                    <input type="password" name="password" id="newPass" class="form-control validate[required,minSize[6],maxSize[15],custom[onlyLetterNumber]]"
+                                        placeholder="请输入密码">
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">确认密码：</label>
+                                    <input type="password" id="confirmPass" name="confirm_password" class="form-control validate[required,minSize[6],maxSize[15],custom[onlyLetterNumber],equals[password]]"
+                                        placeholder="请再次输入密码">
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">点击刷新：</label>
+                                    <img id="verifyimg" src="{:U( 'User/showVerify')}" width="150px" height="60px">
+                                    <br/>
+                                    <input type="text" id="verify" name="verify" class="form-control validate[required]" placeholder="请输入验证码">
+                                </div>
+                                <button type="submit" class="btn btn-sm btn-primary pull-right m-t-n-xs">提交</button>
+                                <br/>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <!--底部区-->
+    <include file="./Static/footer" />
+    <!--返回顶部按钮-->
+    <a id="gotop" href="JavaScript:void(0)" class="text-center"><img src="HOME_TPL_IMG/returntop.png" alt=""></a>
+    <script src="HOME_TPL_JS/jquery.min.js"></script>
+    <script src="HOME_TPL_JS/bootstrap.min.js"></script>
+    <script src="HOME_TPL_JS/top.js"></script>
+    <script src="//cdn.bootcss.com/flatpickr/3.0.0/flatpickr.js"></script>
+    <script src="HOME_TPL_JS/city-picker.data.js"></script>
+    <script src="HOME_TPL_JS/city-picker.js"></script>
+    <script src="HOME_TPL_JS/jquery.validationEngine-zh_CN.js"></script>
+    <script src="HOME_TPL_JS/jquery.validationEngine.js"></script>
+    <script src="//cdn.bootcss.com/sweetalert/1.1.3/sweetalert.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('#userData').validationEngine('attach', {
+                promptPosition: 'centerRight: -50, -10',
+            });
+            $('#resetForm').validationEngine('attach', {
+                promptPosition: 'centerRight: -50, -10',
+            });
+            flatpickr(".flatpickr", {});
+            var $citypicker = $('#address');
+            $citypicker.citypicker();
+            $("#verifyimg").click(function () {
+                var verifyURL = "{:U( 'User/showVerify', '', '')}";
+                var time = new Date().getTime();
+                $(this).attr({
+                    "src": verifyURL + "/" + time
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

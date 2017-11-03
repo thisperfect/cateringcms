@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>个人中心</title>
+    <meta name="keywords" content="{:C('WEB_KEYWORDS')}">
+    <meta name="description" content="{:C('WEB_DESCRIPTION')}">
+    <link rel="shortcut icon" href="{:C('WEB_FAVICON')}">
+    <link rel="stylesheet" href="HOME_TPL_CSS/bootstrap.min.css">
+    <link rel="stylesheet" href="HOME_TPL_CSS/header.css">
+    <link rel="stylesheet" href="HOME_TPL_CSS/personalcenter.css">
+    <link rel="stylesheet" href="HOME_TPL_CSS/buttom.css">
+    <link rel="stylesheet" href="HOME_TPL_CSS/top.css">
+    <link href="//cdn.bootcss.com/sweetalert/1.1.3/sweetalert.min.css" rel="stylesheet">
+
+
+</head>
+
+<body>
+    <!--头部-->
+    <include file="./Static/head" />
+    <!--首页导航栏-->
+    <include file="./Static/nav" />
+
+    <section>
+        <div class="setup">
+            <div class="container">
+                <!--个人中心侧边栏-->
+                <include file="./Static/clientNav" />
+                <div class="setup-right">
+                    <table class="table table-striped table-bordered table-hover table-bordered dataTables-order" id="">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>订单编号</th>
+                                <th>时间</th>
+                                <th>金额</th>
+                                <th>状态</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <foreach name="order" item="data">
+                                <tr class="order">
+                                    <td><input type="checkbox" name="oid" value="{$data.id}">&nbsp;&nbsp;&nbsp;</td>
+                                    <td>{$data.order_num}</td>
+                                    <td><span>{$data.posttime|date='Y-m-d',###}</span> </td>
+                                    <td>{$data.total}</td>
+                                    <td>
+                                        <for start="0" end="$rows" step="1" name="k">
+                                            <if condition="$data['order_status_id'] eq $status[$k]['id']">{$status[$k]['name']}</if>
+                                        </for>
+                                    </td>
+                                    <td><a href="javascript:void(0)" class="btn btn-danger" onclick="delOrder('{$data.id}','{$key}')">删 除</a></td>
+                                </tr>
+                            </foreach>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th></th>
+                                <th>订单编号</th>
+                                <th>时间</th>
+                                <th>金额</th>
+                                <th>状态</th>
+                                <th>操作</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                    <a href="javascript:void(0)" class="btn btn-primary" onclick="select_all_order()">全选</a>
+                    <a href="javascript:void(0)" class="btn btn-primary" onclick="select_empty_order()">全不选</a>
+                    <a href="javascript:void(0)" class="btn btn-primary" onclick="select_reverse_order()">反选</a>
+                    <a href="javascript:void(0)" class="btn btn-danger" onclick="multiDelOrder()">删除选定</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--底部区-->
+    <include file="./Static/footer" />
+    <!--返回顶部按钮-->
+    <a id="gotop" href="JavaScript:void(0)" class="text-center"><img src="HOME_TPL_IMG/returntop.png" alt=""></a>
+    <!--<script src="HOME_TPL_JS/cart.js"></script>-->
+    <script src="HOME_TPL_JS/jquery.min.js"></script>
+    <script src="HOME_TPL_JS/bootstrap.min.js"></script>
+    <script src="ADMIN_TPL_JS/plugins/dataTables/jquery.dataTables.js"></script>
+    <script src="ADMIN_TPL_JS/plugins/dataTables/dataTables.bootstrap.js"></script>
+    <script src="HOME_TPL_JS/top.js"></script>
+    <script src="//cdn.bootcss.com/sweetalert/1.1.3/sweetalert.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $(".dataTables-order").dataTable();
+        });
+
+        function select_all_order() {
+            $("input[name=oid]:checkbox").prop("checked", true);
+
+        }
+
+        function select_empty_order() {
+            $("input[name=oid]:checkbox").prop("checked", false);
+        }
+
+        function select_reverse_order() {
+            $("input[name=oid]:checkbox").each(function () {
+                $(this).prop("checked", !$(this).prop("checked"));
+            });
+        }
+
+        function delOrder(oid, liid) {
+            swal({
+                title: "您确定要删除此订单吗",
+                text: "删除后将无法恢复，请谨慎操作！",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "是的，我要删除！",
+                cancelButtonText: "让我再考虑一下…",
+                closeOnConfirm: false,
+                closeOnCancel: false
+            }, function (isConfirm) {
+                if (isConfirm) {
+                    $.ajax({
+                        type: "get",
+                        url: "{:U('Good/delOrder')}",
+                        data: {
+                            'oid': oid
+                        },
+                        dataType: "json",
+                        success: function (response) {
+                            if (response['deleteCode'] == 1) {
+                                swal("删除成功", "您已经永久删除了此订单！", "success");
+                                $('table#table').find('tr.order').eq(liid).remove();
+                                setTimeout(function () {
+                                    location.reload()
+                                }, 2000);
+                            } else if (response['deleteCode'] == 0) {
+                                swal("删除失败", "订单删除失败或者订单不存在！", "error");
+                            } else if (response['deleteCode'] == 2) {
+                                swal("删除失败", "订单不存在或者已经被删除！", "error");
+                            }
+                        }
+                    });
+                } else {
+                    swal("已取消", "您取消了删除操作！", "error")
+                }
+            });
+        }
+
+        function multiDelOrder() {
+            var oidList = new Array();
+            $("input[name='oid']:checked").each(function () {
+                oidList.push($(this).val());
+            });
+            swal({
+                title: "您确定要删除这几条订单吗",
+                text: "删除后将无法恢复，请谨慎操作！",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "是的，我要删除！",
+                cancelButtonText: "让我再考虑一下…",
+                closeOnConfirm: false,
+                closeOnCancel: false
+            }, function (isConfirm) {
+                if (isConfirm) {
+                    $.ajax({
+                        type: "post",
+                        url: "{:U('Good/delOrder')}",
+                        data: {
+                            'oidlist': oidList
+                        },
+                        dataType: "json",
+                        success: function (response) {
+                            if (response['deleteCode'] == 1) {
+                                swal("删除已完成！", response['success'] + " 成功 " + response['fail'] +
+                                    " 失败", "success");
+                                setTimeout(function () {
+                                    location.reload()
+                                }, 2000);
+                            } else if (response['deleteCode'] == 0) {
+                                swal("删除失败", "订单删除失败或者订单不存在！", "error");
+                            } else if (response['deleteCode'] == 2) {
+                                swal("删除失败", "订单不存在或者已经被删除！", "error");
+                            }
+                        }
+                    });
+                } else {
+                    swal("已取消", "您取消了删除操作！", "error")
+                }
+            });
+        }
+    </script>
+</body>
+
+</html>

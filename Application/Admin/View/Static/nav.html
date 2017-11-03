@@ -1,0 +1,146 @@
+<nav class="navbar-default navbar-static-side" role="navigation">
+    <div class="nav-close"><i class="fa fa-times-circle"></i>
+    </div>
+    <div class="sidebar-collapse">
+        <ul class="nav" id="side-menu">
+            <li class="nav-header">
+                <div class="dropdown profile-element">
+                    <span><img alt="image" class="img-circle" height="60" width="60" src="ADMIN_TPL_IMG/admin.png" /></span>
+                    <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                        <span class="clear">
+                               <span class="block m-t-xs"><strong class="font-bold">{$name}</strong></span>
+                        <span class="text-muted text-xs block">个人中心<b class="caret"></b></span>{$group}
+                        </span>
+                    </a>
+                    <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                        <!--<li><a class="J_menuItem" href="#">修改头像</a>
+                        </li>-->
+                        <li><a class="J_menuItem" href="{:U('Public/edit_info')}">个人资料</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li><a href="{:U('Login/logout')}">安全退出</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="logo-element">A
+                </div>
+            </li>
+            <li>
+                <a href="#">
+                    <i class="fa fa-users"></i>
+                    <span class="nav-label">用户管理</span>
+                    <span class="fa arrow"></span>
+                </a>
+                <ul class="nav nav-second-level">
+                    <li>
+                        <a class="J_menuItem" href="{:U('Admin/index')}">管理员管理</a>
+                    </li>
+                    <li>
+                        <a class="J_menuItem" href="{:U('User/index')}">会员管理</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="#">
+                    <i class="fa fa-cog"></i>
+                    <span class="nav-label">网站管理</span>
+                    <span class="fa arrow"></span>
+                </a>
+                <ul class="nav nav-second-level">
+                    <li>
+                        <a class="J_menuItem" href="{:U('Config/index')}">网站信息配置</a>
+                    </li>
+                    <li>
+                        <a class="J_menuItem" href="{:U('Upload/index')}">上传图片管理</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="#">
+                    <i class="fa fa-tasks"></i>
+                    <span class="nav-label">内容管理</span>
+                    <span class="fa arrow"></span>
+                </a>
+                <ul class="nav nav-second-level">
+                    <li>
+                        <a href="#">
+                            <span class="nav-label">菜品类别管理</span>
+                            <span class="fa arrow"></span>
+                        </a>
+                        <ul class="nav nav-third-level">
+                            <li><a class="J_menuItem" href="{:U('Category/index')}">菜谱类别管理</a></li>
+                            <li><a class="J_menuItem" href="{:U('Material/index')}">食材类别管理</a></li>
+                            <li><a class="J_menuItem" href="{:U('Property/index')}">菜品属性管理</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <span class="nav-label">口味份量管理</span>
+                            <span class="fa arrow"></span>
+                        </a>
+                        <ul class="nav nav-third-level">
+                            <li><a class="J_menuItem" href="{:U('Taste/index')}">口味管理</a></li>
+                            <li><a class="J_menuItem" href="{:U('Weight/index')}">份量管理</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="J_menuItem" href="{:U('Menu/index')}">菜品列表管理</a>
+                    </li>
+                    <li>
+                        <a class="J_menuItem" href="{:U('Chef/index')}">厨师信息管理</a>
+                    </li>
+                    <li>
+                        <a class="J_menuItem" href="{:U('Page/index')}">网站单页信息管理</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="#">
+                    <i class="fa fa-list-ul"></i>
+                    <span class="nav-label">订单管理</span>
+                    <span class="fa arrow"></span>
+                </a>
+                <ul class="nav nav-second-level">
+                    <li>
+                        <a href="#">
+                            <span class="nav-label">订单管理</span>
+                            <span class="fa arrow"></span>
+                        </a>
+                        <ul class="nav nav-third-level">
+                            <foreach name="o_status" item="o_status_v">
+                                <li><a class="J_menuItem" href="{:U('Order/index?status_id='.$o_status_v['id'])}">{$o_status_v.name}订单</a></li>
+                            </foreach>
+                        </ul>
+                    </li>
+                    <!--<li>
+                        <a class="J_menuItem" href="{:U('Check/index')}">账单统计</a>
+                    </li>-->
+                </ul>
+            </li>
+            <li>
+                <a href="#">
+                    <i class="fa fa-cogs"></i>
+                    <span class="nav-label">其他模块</span>
+                    <span class="fa arrow"></span>
+                </a>
+                <ul class="nav nav-second-level">
+                    <li>
+                        <a class="J_menuItem" href="{:U('Collect/index')}">用户收藏</a>
+                    </li>
+                    <li>
+                        <a class="J_menuItem" href="{:U('Comment/index')}">评论管理</a>
+                    </li>
+                    <li>
+                        <a class="J_menuItem" href="{:U('Message/index')}">留言板管理</a>
+                    </li>
+                    <li>
+                        <a class="J_menuItem" href="{:U('Weblink/index')}">友情链接模块</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a class="J_menuItem" href="help.html"><i class="fa fa-info-circle"></i> <span class="nav-label">帮助文档</span></a>
+            </li>
+        </ul>
+    </div>
+</nav>

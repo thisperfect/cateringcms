@@ -1,0 +1,65 @@
+.panel-title{font-weight:900;}
+.panel-heading{padding:0;}
+.panel-heading h3{padding:10px 10px;}
+.panel-body{background-color:rgba(231,163,230,0.1);}
+.panel-heading span{
+	display:inline-block;
+	width:5px;height:38.4px;
+	background:red;
+	float:left;
+}
+tr>td:nth-child(2),tr>td:nth-child(3),tr>td:nth-child(4),tr>td:nth-child(5),tr>th:nth-child(2),tr>th:nth-child(3),tr>th:nth-child(4),tr>th:nth-child(5){text-align:center;}
+.order>div .panel-body div{margin:15px 0;}
+.order>div:nth-child(3) .panel-body>div{width:20%;float:right;}
+.order>div:nth-child(3) .panel-body>div p{text-align:center;}
+.order>div:nth-child(3) .panel-body>div p span{font-size:18px;color:#fe6400;}
+.order>div:nth-child(1) .panel-body  form>div:nth-child(1),.order>div:nth-child(1) .panel-body  form>div:nth-child(2){
+ width:50%;
+ float:left;
+}
+.order>div:nth-child(1) .panel-body  form>div:nth-child(3) input{
+ width:60%;
+}
+.order>div:nth-child(1) .panel-body  form>div:nth-child(1) input,.order>div:nth-child(1) .panel-body  form>div:nth-child(2) input{
+ width:50%;
+}
+.panel-body tbody tr{line-height:50px;}
+.order>div:nth-child(2) .panel-body table{width:100%;}
+.order>div:nth-child(2) .panel-body table thead tr th:nth-child(1){width:50%;}
+.order>div:nth-child(2) .panel-body table thead tr th:nth-child(2),.order>div:nth-child(2) .panel-body table thead tr th:nth-child(2){width:25%;}
+.order>div:nth-child(3) table{width:100%;}
+.order>div:nth-child(3) .panel-body table thead tr th:nth-child(1){width:30%;}
+.order>div:nth-child(3) .panel-body table thead tr th:nth-child(2){width:15%;}
+.order>div:nth-child(3) .panel-body table thead tr th:nth-child(3){width:15%;}
+.order>div:nth-child(3) .panel-body table thead tr th:nth-child(4){width:20%;}
+.order>div:nth-child(3) .panel-body table tbody tr td:nth-child(5){color:#fe6400;}
+.order>div:nth-child(5){margin:10px 0;}
+ 
+@media screen and (max-width:768px){
+	.order>div .panel-body div{font-size:10px;}
+	.order>div:nth-child(1) .panel-body  form>div:nth-child(1) input,.order>div:nth-child(1) .panel-body  form>div:nth-child(2) input{
+ width:55%;
+}
+td{font-size:12px;}
+th{font-size:14px;}
+.panel-body{padding:10px 5px;}
+.panel-body tbody tr{line-height:25px;}
+
+.order>div:nth-child(3) .panel-body>div{width:40%;float:right;}
+.order>div:nth-child(3) .panel-body>div p{text-align:center;}
+.order>div:nth-child(3) .panel-body>div p span{font-size:18px;color:#fe6400;}
+.order>div .panel-body>div {
+    margin: 10px 0;
+}
+}
+@media screen and (max-width:415px){
+	.panel-heading span{
+	width:3px;height:27.6px;}
+	.panel-heading h3{padding:5px 10px;} 
+	 
+}
+	
+	.order>div:nth-child(3) .panel-body>div{width:50%;float:right;}
+	.btn {font-size:12px;}
+}
+ 

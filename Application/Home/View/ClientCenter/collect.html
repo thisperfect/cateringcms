@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>个人中心</title>
+    <meta name="keywords" content="{:C('WEB_KEYWORDS')}">
+    <meta name="description" content="{:C('WEB_DESCRIPTION')}">
+    <link rel="shortcut icon" href="{:C('WEB_FAVICON')}">
+    <link rel="stylesheet" href="HOME_TPL_CSS/bootstrap.min.css">
+    <link rel="stylesheet" href="HOME_TPL_CSS/header.css">
+    <link rel="stylesheet" href="HOME_TPL_CSS/personalcenter.css">
+    <link href="//cdn.bootcss.com/sweetalert/1.1.3/sweetalert.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="HOME_TPL_CSS/buttom.css">
+    <link rel="stylesheet" href="HOME_TPL_CSS/top.css">
+</head>
+
+<body>
+    <!--头部-->
+    <include file="./Static/head" />
+    <!--首页导航栏-->
+    <include file="./Static/nav" />
+
+    <section>
+        <div class="setup">
+            <div class="container">
+                <!--个人中心侧边栏-->
+                <include file="./Static/clientNav" />
+                <div class="setup-right">
+                    <table class="table table-striped table-bcollected table-hover table-bordered dataTables-collect" id="table">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>商品</th>
+                                <th>缩略图</th>
+                                <th>单价</th>
+                                <th>数量</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <foreach name="data" item="collect">
+                                <tr class="collect">
+                                    <td><input type="checkbox" name="cid" value="{$collect.cid}"></td>
+                                    <td>{$collect.name}</td>
+                                    <td><img src="{$collect.picurl}" alt="{$collect.name}" width="64px" height="64px"></td>
+                                    <td>￥{$collect.price}</td>
+                                    <td>1份</td>
+                                    <td><a href="javascript:void(0)" class="btn btn-primary" onclick="turnToCart('{$collect.cid}','{$collect.name}','{$collect.price}','{$collect.picurl}')">购买</a>&nbsp;&nbsp;
+                                        <a href="javascript:void(0)" class="btn btn-danger" onclick="delCollect('{$collect.cid}','{$key}')">删除</a>
+                                    </td>
+                                </tr>
+                            </foreach>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th></th>
+                                <th>商品</th>
+                                <th>缩略图</th>
+                                <th>单价</th>
+                                <th>数量</th>
+                                <th>操作</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                    <a href="javascript:void(0)" class="btn btn-primary" onclick="select_all_collect()">全选</a>
+                    <a href="javascript:void(0)" class="btn btn-primary" onclick="select_empty_collect()">全不选</a>
+                    <a href="javascript:void(0)" class="btn btn-primary" onclick="select_reverse_collect()">反选</a>
+                    <a href="javascript:void(0)" class="btn btn-danger" onclick="multiDelCollect()">删除选定</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--底部区-->
+    <include file="./Static/footer" />
+    <!--返回顶部按钮-->
+    <a id="gotop" href="JavaScript:void(0)" class="text-center"><img src="HOME_TPL_IMG/returntop.png" alt=""></a>
+    <script src="HOME_TPL_JS/jquery.min.js"></script>
+    <script src="HOME_TPL_JS/bootstrap.min.js"></script>
+    <script src="ADMIN_TPL_JS/plugins/dataTables/jquery.dataTables.js"></script>
+    <script src="ADMIN_TPL_JS/plugins/dataTables/dataTables.bootstrap.js"></script>
+    <script src="HOME_TPL_JS/top.js"></script>
+    <script src="//cdn.bootcss.com/sweetalert/1.1.3/sweetalert.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $(".dataTables-collect").dataTable();
+        });
+
+        function select_all_collect() {
+            $("input[name=cid]:checkbox").prop("checked", true);
+
+        }
+
+        function select_empty_collect() {
+            $("input[name=cid]:checkbox").prop("checked", false);
+        }
+
+        function select_reverse_collect() {
+            $("input[name=cid]:checkbox").each(function () {
+                $(this).prop("checked", !$(this).prop("checked"));
+            });
+        }
+
+        function delCollect(cid, liid) {
+            swal({
+                title: "您确定要删除此收藏吗",
+                text: "删除后将无法恢复，请谨慎操作！",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "是的，我要删除！",
+                cancelButtonText: "让我再考虑一下…",
+                closeOnConfirm: false,
+                closeOnCancel: false
+            }, function (isConfirm) {
+                if (isConfirm) {
+                    $.ajax({
+                        type: "get",
+                        url: "{:U('Good/delCollect')}",
+                        data: {
+                            'cid': cid
+                        },
+                        dataType: "json",
+                        success: function (response) {
+                            if (response['deleteCode'] == 1) {
+                                swal("删除成功", "您已经永久删除了此收藏！", "success");
+                                $('table#table').find('tr.collect').eq(liid).remove();
+                                setTimeout(function () {
+                                    location.reload()
+                                }, 2000);
+                            } else if (response['deleteCode'] == 0) {
+                                swal("删除失败", "收藏删除失败或者收藏不存在！", "error");
+                            } else if (response['deleteCode'] == 2) {
+                                swal("删除失败", "收藏不存在或者已经被删除！", "error");
+                            }
+                        }
+                    });
+                } else {
+                    swal("已取消", "您取消了删除操作！", "error")
+                }
+            });
+        }
+
+        function multiDelCollect() {
+            var cidList = new Array();
+            $("input[name='cid']:checked").each(function () {
+                cidList.push($(this).val());
+            });
+            swal({
+                title: "您确定要删除这几条收藏吗",
+                text: "删除后将无法恢复，请谨慎操作！",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "是的，我要删除！",
+                cancelButtonText: "让我再考虑一下…",
+                closeOnConfirm: false,
+                closeOnCancel: false
+            }, function (isConfirm) {
+                if (isConfirm) {
+                    $.ajax({
+                        type: "post",
+                        url: "{:U('Good/delCollect')}",
+                        data: {
+                            'cidlist': cidList
+                        },
+                        dataType: "json",
+                        success: function (response) {
+                            if (response['deleteCode'] == 1) {
+                                swal("删除已完成！", response['success'] + " 成功 " + response['fail'] +
+                                    " 失败", "success");
+                                setTimeout(function () {
+                                    location.reload()
+                                }, 2000);
+                            } else if (response['deleteCode'] == 0) {
+                                swal("删除失败", "收藏删除失败或者收藏不存在！", "error");
+                            } else if (response['deleteCode'] == 2) {
+                                swal("删除失败", "收藏不存在或者已经被删除！", "error");
+                            }
+                        }
+                    });
+                } else {
+                    swal("已取消", "您取消了删除操作！", "error")
+                }
+            });
+        }
+
+        function addCart(id, name, price, img) {
+            $.ajax({
+                type: "post",
+                url: "{:U('Cart/addCart')}",
+                data: {
+                    "id": id,
+                    "name": name,
+                    "price": price,
+                    "img": img
+                },
+                dataType: "json",
+                success: function (response) {
+                    if (response['code'] == 1) {
+                        swal('成功', '更多信息请查看购物车', 'success');
+                    } else {
+                        var str = "";
+                        for (var i in response) {
+                            str += response[i] + "\n";
+                        }
+                        swal("失败", str, "error");
+                    }
+                }
+            });
+
+        }
+
+        function turnToCart(id, name, price, img) {
+
+            addCart(id, name, price, img);
+            window.location.href = "{:U('Good/cart')}";
+        }
+    </script>
+</body>
+
+</html>

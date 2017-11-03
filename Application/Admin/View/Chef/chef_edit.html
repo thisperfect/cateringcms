@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <title>厨师信息修改</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <link rel="shortcut icon" href="{:C('WEB_FAVICON')}">
+    <link href="ADMIN_TPL_CSS/bootstrap.min-v=3.3.6.css" rel="stylesheet">
+    <link href="ADMIN_TPL_CSS/font-awesome.min-v=4.4.0.css" rel="stylesheet">
+    <link href="ADMIN_TPL_CSS/plugins/iCheck/custom.css" rel="stylesheet">
+    <link href="ADMIN_TPL_CSS/animate.min.css" rel="stylesheet">
+    <link href="ADMIN_TPL_CSS/style.min-v=4.1.0.css" rel="stylesheet">
+    <link href="ADMIN_TPL_CSS/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+    <link href="ADMIN_CUS_PLUG/dropify/css/dropify.min.css" rel="stylesheet">
+</head>
+
+<body class="gray-bg">
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-sm-4">
+            <h2>厨师信息修改</h2>
+            <ol class="breadcrumb">
+                <li>
+                    <a href="{:U('Chef/index')}">厨师信息管理</a>
+                </li>
+                <li>
+                    <strong>厨师信息修改</strong>
+                </li>
+            </ol>
+        </div>
+    </div>
+
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>基本信息</h5>
+                    </div>
+                    <div class="ibox-content">
+                        <form class="form-horizontal" id="signupForm">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">厨师姓名：</label>
+                                <div class="col-sm-8">
+                                    <input id="name" name="name" class="form-control" value="{$chef.name}" type="text">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">关键字：</label>
+                                <div class="col-sm-8">
+                                    <input id="keyword" name="keyword" class="form-control" value="{$chef.keyword}" type="text">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">描述：</label>
+                                <div class="col-sm-8">
+                                    <input id="description" name="description" class="form-control" value="{$chef.description}" type="text">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">详细介绍：</label>
+                                <div class="col-sm-8">
+                                    <textarea id="content" name="content" class="form-control">{$chef.content}</textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">图片：</label>
+                                <div class="col-sm-8">
+                                    <notempty name="chef.picurl">
+                                        <div id="p_div">
+                                            <img src="{$chef.picurl}" alt="图标" width="64" height="64">
+                                        </div>
+                                        <div id="p_hr" class="hr-line-dashed"></div>
+                                    </notempty>
+                                    <input type="file" id="photo" class="dropify" data-height="150" onchange="pic_upload('photo','picurl');" />
+                                    <input type="hidden" class="form-control" id="picurl" name="picurl" value="{$chef.picurl}">
+                                </div>
+                            </div>
+                            <div class=" form-group ">
+                                <label class="col-sm-3 control-label">显示状态：</label>
+                                <div class="col-sm-8">
+                                    <label class="radio-inline i-checks"><input type="radio" value="1" id="checkinfo1" name="checkinfo" <eq name="chef.checkinfo" value="1">checked</eq>>显示</label>
+                                    <label class="radio-inline i-checks"><input type="radio" value="0" id="checkinfo2" name="checkinfo" <eq name="chef.checkinfo" value="0">checked</eq>>隐藏</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-8 col-sm-offset-3">
+                                    <button class="btn btn-primary" onclick="edit_chef()">提交</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="ADMIN_TPL_JS/jquery.min-v=2.1.4.js "></script>
+    <script src="ADMIN_TPL_JS/bootstrap.min-v=3.3.6.js "></script>
+    <script src="ADMIN_TPL_JS/plugins/validate/jquery.validate.min.js"></script>
+    <script src="ADMIN_TPL_JS/plugins/validate/messages_zh.min.js"></script>
+    <script src="ADMIN_TPL_JS/plugins/iCheck/icheck.min.js "></script>
+    <script src="ADMIN_TPL_JS/plugins/sweetalert/sweetalert.min.js "></script>
+    <script src="ADMIN_CUS_PLUG/dropify/js/dropify.min.js"></script>
+    <script>
+        var edit_chef_url = "{:U('Chef/chef_edit?cid='.$chef['id'])}";
+        var manageChef = "{:U('Chef/index')}";
+        var uploadUrl = "{:U('Upload/upload_file')}";
+        $(document).ready(function() {
+            $(".i-checks").iCheck({
+                checkboxClass: "icheckbox_square-green",
+                radioClass: "iradio_square-green",
+            });
+            $('.dropify').dropify({
+                messages: {
+                    'default': '点击或拖拽图片到这里',
+                    'replace': '点击或拖拽图片到这里来替换图片',
+                    'remove': '移除',
+                    'error': '对不起，你上传的图片太大了'
+                }
+            });
+            $("div#photo").click(function() {
+                $("div#p_div,div#p_hr").remove();
+            });
+        });
+    </script>
+    <script src="ADMIN_CUS_PLUG/dropify/upload.js"></script>
+    <script src="ADMIN_CUS_JS/chef/validator.chef.js "></script>
+    <script src="ADMIN_CUS_JS/chef/chef.js "></script>
+</body>
+
+</html>

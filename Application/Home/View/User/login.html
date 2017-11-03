@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>登陆</title>
+    <meta name="keywords" content="{:C('WEB_KEYWORDS')}">
+    <meta name="description" content="{:C('WEB_DESCRIPTION')}">
+    <link rel="shortcut icon" href="{:C('WEB_FAVICON')}">
+    <link rel="stylesheet" href="HOME_TPL_CSS/bootstrap.min.css">
+    <link rel="stylesheet" href="HOME_TPL_CSS/header.css">
+    <link rel="stylesheet" href="HOME_TPL_CSS/login.css">
+    <link rel="stylesheet" href="HOME_TPL_CSS/buttom.css">
+    <link rel="stylesheet" href="HOME_TPL_CSS/top.css">
+    <link href="ADMIN_TPL_CSS/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+    <link rel="stylesheet" href="HOME_TPL_CSS/validationEngine.jquery.css">
+
+
+</head>
+
+<body>
+    <!--头部-->
+    <include file="./Static/head" />
+    <!--首页导航栏-->
+    <include file="./Static/nav" />
+    <section>
+        <div class="welcome">
+            <div class="container clearfix">
+
+                <div class="welcomelanding">
+                    <div class="welcomelanding-padding center-block">
+                        <h3>欢迎登陆</h3>
+                        <hr>
+                        <form class="center-block" action="?" method="post" id="loginForm">
+                            <div class="input-group">
+                                <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-user"></span></span>
+                                <input type="text" class="form-control validate[required]" name="uname" id="uname" placeholder="请输入账号">
+                            </div>
+                            <div class="input-group">
+                                <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-lock"></span></span>
+                                <input type="password" class="form-control validate[required]" name="password" id="password" placeholder="请输入密码">
+                            </div>
+                            <button class="btn btn-primary btn-block center-block" type="submit">登 陆</button>
+                        </form>
+                        <hr>
+                        <div align="right"><a href="#forgetPassModal" data-toggle="modal" data-target="#forgetPassModal">忘记密码？</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--底部区-->
+    <include file="./Static/footer" />
+    <div id="forgetPassModal" class="modal fade" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="ibox">
+                        <div class="ibox-title">
+                            <h5>输入您注册的电子邮箱，找回密码：</h5>
+                        </div>
+                        <div class="ibox-content">
+                            <form role="form" action="{:U('User/forgetPass')}" method="post" id="findPass">
+                                <div class="form-group">
+                                    <label class="control-label">邮箱：</label>
+                                    <input type="email" id="email" name="email" class="form-control validate[required,custom[email]]" placeholder="请输入邮箱">
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">点击刷新：</label>
+                                    <img id="verifyimg" src="{:U('User/showVerify')}" width="150px" height="60px">
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">验证码：</label>
+                                    <input type="text" id="verify" name="verify" class="form-control validate[required]" placeholder="请输入验证码">
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label"></label>
+                                    <button type="submit" class="btn btn-sm btn-primary pull-right m-t-n-xs">提交</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--返回顶部按钮-->
+    <a id="gotop" href="JavaScript:void(0)" class="text-center"><img src="HOME_TPL_IMG/returntop.png" alt=""></a>
+    <script src="HOME_TPL_JS/jquery.min.js"></script>
+    <script src="HOME_TPL_JS/bootstrap.min.js"></script>
+    <script src="HOME_TPL_JS/top.js"></script>
+    <script src="ADMIN_TPL_JS/plugins/sweetalert/sweetalert.min.js"></script>
+    <script src="HOME_TPL_JS/jquery.validationEngine-zh_CN.js"></script>
+    <script src="HOME_TPL_JS/jquery.validationEngine.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#verifyimg").click(function () {
+                var verifyURL = "{:U('User/showVerify', '', '')}";
+                var time = new Date().getTime();
+                $(this).attr({
+                    "src": verifyURL + "/" + time
+                });
+            });
+            $('#loginForm').validationEngine('attach', {
+                promptPosition: 'centerRight: -50, -10',
+            });
+            $('#findPass').validationEngine('attach', {
+                promptPosition: 'centerRight: -50, -10',
+            });
+
+        });
+    </script>
+</body>
+
+</html>

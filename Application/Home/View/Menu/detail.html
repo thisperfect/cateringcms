@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Conmpatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>{$menu.name}</title>
+    <meta name="keywords" content="{:C('WEB_KEYWORDS')}">
+    <meta name="description" content="{:C('WEB_DESCRIPTION')}">
+    <link rel="shortcut icon" href="{:C('WEB_FAVICON')}">
+    <link rel="stylesheet" type="text/css" href="HOME_TPL_CSS/bootstrap.min.css">
+    <link rel="stylesheet" href="HOME_TPL_CSS/header.css">
+    <link rel="stylesheet" href="HOME_TPL_CSS/shopping.css">
+    <link rel="stylesheet" href="HOME_TPL_CSS/buttom.css">
+    <link rel="stylesheet" href="HOME_TPL_CSS/top.css">
+    <link rel="stylesheet" href="HOME_TPL_CSS/icheck.css">
+    <link rel="stylesheet" href="HOME_TPL_CSS/zui.min.css">
+    <link href="ADMIN_TPL_CSS/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+    <link rel="stylesheet" href="HOME_TPL_CSS/validationEngine.jquery.css">
+
+</head>
+
+<body>
+    <!--头部-->
+    <include file="./Static/head" />
+    <!--首页导航栏-->
+    <include file="./Static/nav" />
+    <!--商品展示-->
+    <section class="price-area clearfix">
+        <div class="container clearfix">
+            <div class="dizhi">
+                <h1>{$menu.name}</h1>
+            </div>
+            <hr>
+            <div class="picture-area clearfix">
+                <div class="picture-area-left clearfix">
+                    <img class="clearfix" src="{$menu.picurl}" alt="">
+                </div>
+                <div class="picture-area-right clearfix">
+                    <p>秒杀价：<span>￥</span> <span class="price">{$menu.price}</span></p>
+                    <p> 已售：<span class="sales">1388</span>份&nbsp;&nbsp;&nbsp;评分：<span class="grade">4.2</span>分</p>
+                    <p> 口味：
+                        <foreach name="taste" item="taste_v" key="k">
+                            <label class="radio-inline"><input type="radio" value="{$taste_v.id}" id="taste{$taste_v.id}" name="taste" <if condition="$k eq 0">checked</if>>{$taste_v.name}</label>&nbsp;
+                        </foreach>
+                    </p>
+                    <p> 份量：
+                        <foreach name="weight" item="weight_v" key="k">
+                            <label class="radio-inline"><input type="radio" value="{$weight_v.id}" id="weight{$weight_v.id}" name="weight"<if condition="$k eq 0">checked</if>>{$weight_v.name}</label>&nbsp;
+                        </foreach>
+                    </p>
+                    <div class="number">
+                        <span>数量：</span><span><img   src="HOME_TPL_IMG/shangpinxiangqing/jia.png" id="jia"><input class="input"form="longer" type="text" value="1" id="num" disabled><img src="HOME_TPL_IMG/shangpinxiangqing/jian.png" id="jian">  </span>
+                    </div>
+                    <p><button class="btn btn-danger" onclick="collectMeanu('{$Think.session.user.uid}','{$menu.id}')"><span class="glyphicon glyphicon-star"></span>&nbsp;收藏</button></p>
+                    <button class="btn btn-warning" onclick="turnToCart('{$menu.id}','{$menu.name}','{$menu.price}','{$menu.picurl}')"><span class="glyphicon glyphicon-ok"></span>&nbsp;立即购买</button>
+                    <button class="btn btn-success" onclick="addCart('{$menu.id}','{$menu.name}','{$menu.price}','{$menu.picurl}')"><span class="glyphicon glyphicon-shopping-cart"></span>&nbsp;加入购物车</button>
+
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <!--详情-->
+    <section class="details">
+        <div class="container">
+
+            <div class="xcontent">
+                <div class="clearfix">
+                    <h3>购买须知</h3>
+                    <hr>
+                    <dl>
+                        <dt>有效期</dt>
+                        <dd>2013.12.25至2017.6.13(周末、法定假日通用)</dd>
+                        <dt>使用时间</dt>
+                        <dd>11:00-次日02:00</dd>
+                        <dt>预约提醒</dt>
+                        <dd>无需预约</dd>
+                        <dt>限购限用提醒</dt>
+                        <dd>每张券建议1人使用</dd>
+                        <dt>其他费用</dt>
+                        <dd>方案不含餐巾纸，需到店另付0.5元/份</dd>
+                        <dt>包间</dt>
+                        <dd>店内无包间</dd>
+                        <dt>堂食外带</dt>
+                        <dd>堂食外带均可，可免费打包</dd>
+                        <dt>温馨提示</dt>
+                        <dd>团购用户不可同时享受商家其他优惠</dd>
+
+                    </dl>
+                </div>
+                <div>
+                    <h3>
+                        本单详情
+                    </h3>
+                    <hr>
+                    <table>
+
+                        <tbody>
+                            <tr>
+                                <th class="center">套餐内容</th>
+                                <th class="center">单价</th>
+                                <th class="center">数量/规格</th>
+                                <th class="center">小计</th>
+                            </tr>
+                            <tr>
+                                <td>{$menu.name}</td>
+                                <td>￥{$menu.price}</td>
+                                <td>1份</td>
+                                <td>￥{$menu.price}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="clearfix details2">
+                        {$menu.content}
+                    </div>
+                </div>
+                <div>
+                    <hr>
+                    <div class="comments">
+                        <header>
+                            <div class="pull-right"><a href="#commentReplyForm" class="btn btn-danger"><i class="icon-comment-alt"></i> 发表评论</a></div>
+                            <h3>消费评价</h3>
+                        </header>
+                        <section class="comments-list">
+                            <foreach name="comment" item="data">
+                                <div class="comment">
+                                    <a href="javascript:void(0)" class="avatar">
+                            <img src="{$data.head|default='HOME_TPL_IMG/default.jpg'}" alt=""></a>
+                                    <!--一级评论-->
+                                    <div class="content">
+                                        <div class="pull-right text-muted">{$data.posttime|date='Y-m-d',###}</div>
+                                        <div><a href="javascript:void(0)" style="color:#000;"><strong>{$data.name}</strong></a></div>
+                                        <div class="text">{$data.content}</div>
+                                        <div class="actions">
+                                            <a href="#commentReplyForm" onclick="replay('{$data.id}','{$data.name}')">回复</a>
+                                        </div>
+                                        <div class="comments-list">
+                                            <foreach name="data.children" item="child">
+                                                <div class="comment">
+                                                    <a href="javascript:void(0)" class="avatar">
+                                            <img src="{$child.head|default='HOME_TPL_IMG/default.jpg'}" alt=""></a>
+                                                    <div class="content">
+                                                        <div class="pull-right text-muted">{$child.posttime|date='Y-m-d',###}</div>
+                                                        <div><a href="javascript:void(0)" style="color:#000;"><strong>{$child.name}</strong></a>
+                                                            <span class="text-muted">回复</span> <a href="javascript:void(0)"
+                                                                style="color:#000;">{$data.name}</a></div>
+                                                        <div class="text">{$child.content}</div>
+                                                        <div class="actions">
+                                                            <a href="#commentReplyForm" onclick="replay('{$child.id}','{$child.name}')">回复</a>
+                                                        </div>
+                                                    </div>
+                                                    <!--三级评论-->
+                                                    <div class="comments-list">
+                                                        <foreach name="child.children" item="grandson">
+                                                            <div class="comment">
+                                                                <a href="javascript:void(0)" class="avatar">
+                                                        <img src="{$grandson.head|default='HOME_TPL_IMG/default.jpg'}" alt=""></a>
+                                                                <div class="content">
+                                                                    <div class="pull-right text-muted">{$grandson.posttime|date='Y-m-d',###}</div>
+                                                                    <div><a href="javascript:void(0)" style="color:#000;"><strong>{$grandson.name}</strong></a>
+                                                                        <span class="text-muted">回复</span> <a href="javascript:void(0)"
+                                                                            style="color:#000;">{$child.name}</a></div>
+                                                                    <div class="text">{$child.content}</div>
+                                                                </div>
+                                                            </div>
+                                                        </foreach>
+                                                    </div>
+                                                </div>
+                                            </foreach>
+                                        </div>
+                                    </div>
+                                </div>
+                            </foreach>
+                        </section>
+                        <!--回复页脚-->
+                        <include file="./Static/commentFooter" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- 评论 -->
+    <!--底部区-->
+    <include file="./Static/footer" />
+    <!--返回顶部按钮-->
+    <a id="gotop" href="JavaScript:void(0)" class="text-center"><img src="HOME_TPL_IMG/returntop.png" alt=""></a>
+    <script src="HOME_TPL_JS/jquery.min.js"></script>
+    <script src="HOME_TPL_JS/bootstrap.min.js"></script>
+    <script src="HOME_TPL_JS/top.js"></script>
+    <script src="HOME_TPL_JS/zui.min.js"></script>
+    <script src="HOME_TPL_JS/icheck.js"></script>
+    <script src="ADMIN_TPL_JS/plugins/sweetalert/sweetalert.min.js"></script>
+    <script src="HOME_TPL_JS/jquery.validationEngine-zh_CN.js"></script>
+    <script src="HOME_TPL_JS/jquery.validationEngine.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('input').iCheck({
+                checkboxClass: 'icheckbox_minimal-red',
+                radioClass: 'iradio_minimal-red',
+                increaseArea: '20%' // optional
+            });
+            $('#commentForm').validationEngine('attach', {
+                promptPosition: 'topLeft:60,10',
+            });
+
+            var count = 1;
+            $('#num').val(count);
+            $('#jia').click(function () {
+                count = count + 1;
+                $('#num').val(count);
+            });
+            $('#jian').click(function () {
+                count = count - 1;
+                if (count <= 0) {
+                    swal('错误', '数量最小为1', 'error')
+                } else($('#num').val(count));
+            });
+        });
+
+        function replay(pid, toName) {
+            $("textarea[name='content']").attr("placeholder", "@" + toName);
+            $("input[name='parent_id']").val(pid);
+        }
+
+        function collectMeanu(uid, mid) {
+            $.ajax({
+                type: "post",
+                url: "{:U('Good/addCollect')}",
+                data: {
+                    'uid': uid,
+                    'menu_id': mid,
+                },
+                dataType: "json",
+                success: function (response) {
+                    if (response['code'] == 1) {
+                        swal('添加收藏成功', '更多信息请查看收藏夹', 'success');
+                    } else {
+                        var str = "";
+                        for (var i in response) {
+                            str += response[i] + "\n";
+                        }
+                        swal("添加收藏失败", str, "error");
+                    }
+                }
+            });
+        }
+
+        function addCart(id, name, price, img) {
+            num = $('#num').val();
+            taste = $("input[name='taste']:checked").val();
+            weight = $("input[name='weight']:checked").val();
+            $.ajax({
+                type: "post",
+                url: "{:U('Cart/addCart')}",
+                data: {
+                    "id": id,
+                    "name": name,
+                    "taste": taste,
+                    "weight": weight,
+                    "price": price,
+                    "num": num,
+                    "img": img
+                },
+                dataType: "json",
+                success: function (response) {
+                    if (response['code'] == 1) {
+                        swal('成功', '更多信息请查看购物车', 'success');
+                    } else {
+                        var str = "";
+                        for (var i in response) {
+                            str += response[i] + "\n";
+                        }
+                        swal("失败", str, "error");
+                    }
+                }
+            });
+
+        }
+
+        function turnToCart(id, name, price, img) {
+
+            addCart(id, name, price, img);
+            window.location.href = "{:U('Good/cart')}";
+        }
+    </script>
+</body>
+
+</html>

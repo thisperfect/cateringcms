@@ -1,0 +1,306 @@
+<!DOCTYPE>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>美食杰</title>
+    <meta name="keywords" content="{:C('WEB_KEYWORDS')}">
+    <meta name="description" content="{:C('WEB_DESCRIPTION')}">
+    <link rel="shortcut icon" href="{:C('WEB_FAVICON')}">
+    <link rel="stylesheet" href="HOME_TPL_CSS/bootstrap.min.css">
+    <link rel="stylesheet" href="HOME_TPL_CSS/index.css">
+    <link rel="stylesheet" href="HOME_TPL_CSS/buttom.css">
+    <link rel="stylesheet" href="HOME_TPL_CSS/top.css">
+</head>
+
+<body>
+    <!--头部-->
+    <include file="./Static/head" />
+    <section class="search">
+        <div class="container">
+            <div class="logo">
+                <img class="" src="HOME_TPL_IMG/top-logo.png">
+            </div>
+            <form method="get" action="{:U('Menu/search')}" id="searchM">
+                <div class="find-area">
+                    <div class="find-area center-block clearfix">
+                        <div class="input-group">
+                            <input type="text" name="keyword" class="form-control input-lg" placeholder="请输入关键词"><span class="input-group-addon btn btn-warning"
+                                id="search">搜索</span>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+    <!--首页导航栏-->
+    <include file="./Static/nav" />
+    <section>
+        <!-- 菜品大图轮播 -->
+        <div id="carousel-example-generic" class="carousel slide banner1 clearfix" data-ride="carousel">
+            <div class="carousel-inner" role="listbox">
+                <foreach name="bigPic" item="bp" key="k">
+                    <div class="item <eq name='k' value='0'>active</eq>">
+                        <a href="{:U('Menu/detail?mid='.$bp[id])}"><img src="{$bp.picurl|default='HOME_TPL_IMG/noimg.jpg'}" alt="{$bp.name}"></a>
+                        <div class="carousel-caption">
+                            <h3>{$bp.name}</h3>
+                            <p>{$bp.description}</p>
+                        </div>
+                    </div>
+                </foreach>
+            </div>
+            <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+    </section>
+
+    <section>
+        <div class="bg2">
+            <div class="container clearfix">
+                <div class="banner2 clearfix">
+                    <!--侧边菜单栏-->
+                    <div class="banner2-left">
+                        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                            <foreach name="navAll" item="nav" key="key">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading" role="tab" id="heading{$key}">
+                                        <h4 class="panel-title">
+                                            <eq name="key" value="0"><a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse{$key}"
+                                                    aria-expanded="true" aria-controls="collapse{$key}">热卖{$nav.title}&nbsp;<span class="glyphicon glyphicon-menu-down"></span></a>
+                                                <else/><a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion"
+                                                    href="#collapse{$key}" aria-expanded="false" aria-controls="collapse{$key}">热卖{$nav.title}&nbsp;<span class="glyphicon glyphicon-menu-down"></span></a></eq>
+                                        </h4>
+                                    </div>
+                                    <div id="collapse{$key}" <eq name="key" value="0">class="panel-collapse collapse in"
+                                        <else/>class="panel-collapse collapse"</eq> role="tabpanel" aria-labelledby="heading{$key}">
+                                        <div class="panel-body">
+                                            <ul>
+                                                <foreach name="nav['nav']" item="nv" key="nvk">
+                                                    <li <if condition="$nvk gt 5">class="list-up-({$nvk}-4)"</if> ><a href="{:U('Menu/detail?mid='.$nv[id])}"><span class="glyphicon glyphicon-triangle-right"></span>{$nv.name}</a></li>
+                                                </foreach>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </foreach>
+                        </div>
+                    </div>
+                    <!-- 每日热荐小轮播 -->
+                    <div class="banner2-right">
+                        <div class="banner2-right-bg">
+                            <img class="center-block" src="HOME_TPL_IMG/banner2-left-text.png" alt="">
+                        </div>
+                        <div id="carousel-example-captions" class="carousel slide" data-ride="carousel">
+                            <div class="carousel-inner" role="listbox">
+                                <div class="item active">
+                                    <div class="carousel-caption-left">
+                                        <a href="{:U('Menu/detail?mid='.$pic1[0][id])}"><img src="{$pic1['0']['picurl']|default='HOME_TPL_IMG/noimg.jpg'}" alt="{$pic1['0']['name']}"></a>
+                                        <a href="{:U('Menu/detail?mid='.$pic1[0][id])}">
+                                            <div class="bg-up1">
+                                                <h2>{$pic1['0']['name']}</h2>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="carousel-caption-right clearfix">
+                                        <div class="clearfix">
+                                            <a href="{:U('Menu/detail?mid='.$pic1[1][id])}"><img src="{$pic1['1']['picurl']|default='HOME_TPL_IMG/noimg.jpg'}" alt="{$pic1['1']['name']}"></a>
+                                            <a href="{:U('Menu/detail?mid='.$pic1[1][id])}">
+                                                <div class="bg-up2">
+                                                    <h3>{$pic1['1']['name']}</h3>
+                                                </div>
+                                            </a>
+                                        </div>
+                                        <div class="clearfix">
+                                            <a href="{:U('Menu/detail?mid='.$pic1[2][id])}"><img src="{$pic1['2']['picurl']|default='HOME_TPL_IMG/noimg.jpg'}" alt="{$pic1['2']['name']}"></a>
+                                            <a href="{:U('Menu/detail?mid='.$pic1[2][id])}">
+                                                <div class="bg-up3">
+                                                    <h3>{$pic1['2']['name']}</h3>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div class="carousel-caption-left">
+                                        <a href="{:U('Menu/detail?mid='.$pic2[0][id])}"><img src="{$pic2['0']['picurl']|default='HOME_TPL_IMG/noimg.jpg'}" alt="{$pic2['0']['name']}"></a>
+                                        <a href="{:U('Menu/detail?mid='.$pic2[0][id])}">
+                                            <div class="bg-up1">
+                                                <h2>{$pic2['0']['name']}</h2>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="carousel-caption-right clearfix">
+                                        <div class="clearfix">
+                                            <a href="{:U('Menu/detail?mid='.$pic2[1][id])}"><img src="{$pic2['1']['picurl']|default='HOME_TPL_IMG/noimg.jpg'}" alt="{$pic2['1']['name']}"></a>
+                                            <a href="{:U('Menu/detail?mid='.$pic2[1][id])}">
+                                                <div class="bg-up2">
+                                                    <h3>{$pic2['1']['name']}</h3>
+                                                </div>
+                                            </a>
+                                        </div>
+                                        <div class="clearfix">
+                                            <a href="{:U('Menu/detail?mid='.$pic2[2][id])}"><img src="{$pic2['2']['picurl']|default='HOME_TPL_IMG/noimg.jpg'}" alt="{$pic2['2']['name']}"></a>
+                                            <a href="{:U('Menu/detail?mid='.$pic2[2][id])}">
+                                                <div class="bg-up3">
+                                                    <h3>{$pic2['2']['name']}</h3>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div class="carousel-caption-left">
+                                        <a href="{:U('Menu/detail?mid='.$pic3[0][id])}"><img src="{$pic3['0']['picurl']|default='HOME_TPL_IMG/noimg.jpg'}" alt="{$pic3['0']['name']}"></a>
+                                        <a href="{:U('Menu/detail?mid='.$pic3[0][id])}">
+                                            <div class="bg-up1">
+                                                <h2>{$pic3['0']['name']}</h2>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="carousel-caption-right clearfix">
+                                        <div class="clearfix">
+                                            <a href="{:U('Menu/detail?mid='.$pic3[1][id])}"><img src="{$pic3['1']['picurl']|default='HOME_TPL_IMG/noimg.jpg'}" alt="{$pic3['1']['name']}"></a>
+                                            <a href="{:U('Menu/detail?mid='.$pic3[1][id])}">
+                                                <div class="bg-up2">
+                                                    <h3>{$pic3['1']['name']}</h3>
+                                                </div>
+                                            </a>
+                                        </div>
+                                        <div class="clearfix">
+                                            <a href="{:U('Menu/detail?mid='.$pic3[2][id])}"><img src="{$pic3['2']['picurl']|default='HOME_TPL_IMG/noimg.jpg'}" alt="{$pic3['2']['name']}"></a>
+                                            <a href="{:U('Menu/detail?mid='.$pic3[2][id])}">
+                                                <div class="bg-up3">
+                                                    <h3>{$pic3['2']['name']}</h3>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Controls -->
+                                <a class="left carousel-control" href="#carousel-example-captions" role="button" data-slide="prev">
+                                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                                <a class="right carousel-control" href="#carousel-example-captions" role="button" data-slide="next">
+                                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                                <span class="sr-only">Next</span>
+                            </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--展示区 -->
+            <section>
+                <div class="display-area">
+                    <div class="container">
+                        <div class="display-area-list">
+                            <!--全部菜品轮播-->
+                            <div class="display-area-list-top">
+                                <h3>全部菜品</h3><span><a href="{:U('Menu/index')}">更多>></a></span></div>
+                            <div class="display-area-food">
+                                <div id="carousel-example-generid" class="carousel slide" data-ride="carousel">
+                                    <div class="carousel-inner" role="listbox">
+                                        <div class="item active">
+                                            <ul class="clearfix">
+                                                <foreach name="menuAll1" item="vo">
+                                                    <li>
+                                                        <a href="{:U('Menu/detail?mid='.$vo[id])}"><img src="{$vo.picurl|default='HOME_TPL_IMG/noimg.jpg'}" alt=""></a>
+                                                        <h3>{$vo.name}</h3>
+                                                    </li>
+                                                </foreach>
+                                            </ul>
+                                        </div>
+                                        <div class="item">
+                                            <ul class="clearfix">
+                                                <foreach name="menuAll2" item="vo2">
+                                                    <li>
+                                                        <a href="{:U('Menu/detail?mid='.$vo2[id])}"><img src="{$vo2.picurl|default='HOME_TPL_IMG/noimg.jpg'}" alt=""></a>
+                                                        <h3>{$vo.name}</h3>
+                                                    </li>
+                                                </foreach>
+                                            </ul>
+                                        </div>
+                                        <div class="item">
+                                            <ul class="clearfix">
+                                                <foreach name="menuAll3" item="vo3">
+                                                    <li>
+                                                        <a href="{:U('Menu/detail?mid='.$vo3[id])}"><img src="{$vo3.picurl|default='HOME_TPL_IMG/noimg.jpg'}" alt=""></a>
+                                                        <h3>{$vo.name}</h3>
+                                                    </li>
+                                                </foreach>
+                                            </ul>
+                                        </div>
+
+                                    </div>
+
+                                    <!-- Controls -->
+                                    <a class="left carousel-control" href="#carousel-example-generid" role="button" data-slide="prev">
+                                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                                    <span class="sr-only">Previous</span>
+                                </a>
+                                    <a class="right carousel-control" href="#carousel-example-generid" role="button" data-slide="next">
+                                    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                                    <span class="sr-only">Next</span>
+                                </a>
+                                </div>
+                            </div>
+                            <!--特价菜品-->
+                            <div class="display-area-list-top">
+                                <h3>今日特价</h3><span><a href="{:U('Menu/index')}">更多>></a></span></div>
+                            <div class="display-area-food">
+                                <ul class="clearfix">
+                                    <foreach name="discount" item="dv">
+                                        <li>
+                                            <a href="{:U('Menu/detail?mid='.$dv[id])}"><img src="{$dv.picurl|default='HOME_TPL_IMG/noimg.jpg'}" alt=""></a>
+                                            <h3>{$dv.name}</h3>
+                                        </li>
+                                    </foreach>
+                                </ul>
+                            </div>
+                            <!--季节菜品-->
+                            <div class="display-area-list-top">
+                                <h3>好时令</h3><span><a href="{:U('Menu/index')}">更多>></a></span></div>
+                            <div class="display-area-food">
+                                <ul class="clearfix">
+                                    <foreach name="weather" item="wv">
+                                        <li>
+                                            <a href="{:U('Menu/detail?mid='.$wv[id])}"><img src="{$wv.picurl|default='HOME_TPL_IMG/noimg.jpg'}" alt=""></a>
+                                            <h3>{$wv.name}</h3>
+                                        </li>
+                                    </foreach>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+    </section>
+    <!--底部区-->
+    <include file="./Static/footer" />
+    <!--返回顶部按钮-->
+    <a id="gotop" href="JavaScript:void(0)" class="text-center"><img src="HOME_TPL_IMG/returntop.png" alt=""></a>
+    <script src="HOME_TPL_JS/jquery.min.js"></script>
+    <script src="HOME_TPL_JS/bootstrap.min.js"></script>
+    <script src="HOME_TPL_JS/top.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#carousel-example-generic').carousel({
+                interval: 3000
+            });
+            $('#search').click(function () {
+                $('#searchM').submit();
+            });
+        });
+    </script>
+</body>
+
+</html>

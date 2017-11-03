@@ -1,0 +1,79 @@
+<!DOCTYPE>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>网站留言</title>
+    <meta name="keywords" content="{:C('WEB_KEYWORDS')}">
+    <meta name="description" content="{:C('WEB_DESCRIPTION')}">
+    <link rel="shortcut icon" href="{:C('WEB_FAVICON')}">
+    <link rel="stylesheet" href="HOME_TPL_CSS/bootstrap.min.css">
+    <link rel="stylesheet" href="HOME_TPL_CSS/header.css">
+    <link rel="stylesheet" href="HOME_TPL_CSS/buttom.css">
+    <link rel="stylesheet" href="HOME_TPL_CSS/top.css">
+    <link rel="stylesheet" href="HOME_TPL_CSS/zui.min.css">
+    <link rel="stylesheet" href="HOME_TPL_CSS/validationEngine.jquery.css">
+
+</head>
+
+<body>
+    <!--头部-->
+    <include file="./Static/head" />
+    <!--首页导航栏-->
+    <include file="./Static/nav" />
+
+    <!-- 内容 区 -->
+    <section class="connect">
+        <div class="container">
+            <div class="comments">
+                <header>
+                    <div class="pull-right"><a href="#commentReplyForm" class="btn btn-danger"><i class="icon-comment-alt"></i>发表留言</a></div>
+                    <h1>站点留言</h1>
+                </header>
+                <section class="comments-list">
+                    <foreach name="message" item="message">
+                        <div class="comment">
+                            <a href="javascript:void(0)" class="avatar">
+                                <eq name="message.is_vip" value="1">
+                                    <img src="{$message.head|default='HOME_TPL_IMG/default.jpg'}" alt="{$message.name}">
+                                    <else/>
+                                    <img src="HOME_TPL_IMG/default.jpg" alt="{$message.name}">
+                                </eq>
+
+                            </a>
+
+                            <div class="content">
+                                <div class="pull-right text-muted">{$message.posttime|date='Y-m-d',###}</div>
+                                <div><a href="javascript:void(0)" style="color:#000;"><strong>{$message.name}</strong></a></div>
+                                <div class="text">{$message.content}</div>
+                            </div>
+                        </div>
+                    </foreach>
+                </section>
+                <!--回复页脚-->
+                <include file="./Static/messageFooter" />
+            </div>
+        </div>
+    </section>
+    <!--底部区-->
+    <include file="./Static/footer" />
+    <!--返回顶部按钮-->
+    <a id="gotop" href="JavaScript:void(0)" class="text-center"><img src="HOME_TPL_IMG/returntop.png" alt=""></a>
+    <script src="HOME_TPL_JS/jquery.min.js"></script>
+    <script src="HOME_TPL_JS/bootstrap.min.js"></script>
+    <script src="HOME_TPL_JS/top.js"></script>
+    <script src="HOME_TPL_JS/zui.min.js"></script>
+    <script src="HOME_TPL_JS/jquery.validationEngine-zh_CN.js"></script>
+    <script src="HOME_TPL_JS/jquery.validationEngine.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#messageForm').validationEngine('attach', {
+                promptPosition: 'topLeft:60,10',
+            });
+        });
+    </script>
+</body>
+
+</html>

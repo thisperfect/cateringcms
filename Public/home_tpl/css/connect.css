@@ -1,0 +1,37 @@
+  
+/*connect*/
+.connect{
+  padding-top:50px;
+  padding-bottom:30px;
+}
+.connect .connect-first{
+  border-bottom: solid 1px #d8d8d8;
+}
+.connect h3,.connect h4{
+  color:#5b0500;
+}
+.connect a{
+  font-size:large;
+  line-height:20px;
+  color:#5b0500;
+}
+.connect .connect-second{
+  padding-top:15px;
+  font-family:"宋体";
+}
+.connect .connect-third{
+  padding-top:20px;
+  font-family:"宋体";
+}
+.connect p{
+  margin-left:2%;
+}
+.connect .connect-forth{
+  margin-top:40px;
+}
+@media screen and (max-width:768px){
+        .connect h3,.connect h4 strong{font-size:12px;}
+        .connect p{font-size:8px;}
+    }
+
+ 

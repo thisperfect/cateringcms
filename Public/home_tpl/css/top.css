@@ -1,0 +1,55 @@
+
+ #gotop {
+     display: block;
+     width: 50px;
+     height: 50px;
+     position: fixed;
+     bottom: 50px;
+     right: 20px;
+     text-decoration: none;
+     border-radius: 50%;
+     background-color: rgba(255, 255, 255,0.5);
+ }
+ 
+ #gotop img {
+    height:50px;
+    width:50px;
+     border-radius: 50%; 
+ }
+ 
+  
+  
+ 
+  
+ 
+ @media screen and (max-width:1024px) {
+     #gotop {
+         width: 40px;
+         height: 40px;
+         position: fixed;
+         bottom: 50px;
+         right: 20px;
+         padding-left: 1px;
+     }
+      
+    #gotop img{
+        width:40px;
+        height:40px;
+    }
+     
+ }
+ 
+ @media screen and (max-width:415px) {
+     #gotop {
+         width: 30px;
+         height: 30px;
+         position: fixed;
+         bottom: 20px;
+         right: 10px;
+         padding-left: 1px;
+     }
+    #gotop img{
+        width:30px;
+        height:30px;
+    }  
+ }

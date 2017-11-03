@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <title>网站单页添加</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <link rel="shortcut icon" href="{:C('WEB_FAVICON')}">
+    <link href="ADMIN_TPL_CSS/bootstrap.min-v=3.3.6.css" rel="stylesheet">
+    <link href="ADMIN_TPL_CSS/font-awesome.min-v=4.4.0.css" rel="stylesheet">
+    <link href="ADMIN_TPL_CSS/plugins/iCheck/custom.css" rel="stylesheet">
+    <link href="ADMIN_TPL_CSS/animate.min.css" rel="stylesheet">
+    <link href="ADMIN_TPL_CSS/style.min-v=4.1.0.css" rel="stylesheet">
+    <link href="ADMIN_TPL_CSS/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+    <link href="ADMIN_CUS_PLUG/editor/css/wangEditor.min.css" rel="stylesheet">
+</head>
+
+<body class="gray-bg">
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-sm-4">
+            <h2>网站单页添加</h2>
+            <ol class="breadcrumb">
+                <li>
+                    <a href="{:U('Page/index')}">网站单页管理</a>
+                </li>
+                <li>
+                    <strong>网站单页添加</strong>
+                </li>
+            </ol>
+        </div>
+    </div>
+
+    <div class="wrapper wrapper-content animated fadeIn">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>基本信息</h5>
+                    </div>
+                    <div class="ibox-content">
+                        <form class="form-horizontal" id="signupForm">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">标题：</label>
+                                <div class="col-sm-8">
+                                    <input id="title" name="title" class="form-control" type="text">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">作者：</label>
+                                <div class="col-sm-8">
+                                    <input id="author" name="author" class="form-control" type="text">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">详细内容：</label>
+                                <div class="col-sm-8">
+                                    <textarea id="content" name="content" class="form-control"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">审核状态：</label>
+                                <div class="col-sm-8">
+                                    <label class="radio-inline i-checks"><input type="radio" value="1" id="checkinfo1" name="checkinfo">是</label>
+                                    <label class="radio-inline i-checks"><input type="radio" value="0" id="checkinfo0" name="checkinfo">否</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-8 col-sm-offset-3">
+                                    <button class="btn btn-primary" onclick="add_page()">提交</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="ADMIN_TPL_JS/jquery.min-v=2.1.4.js"></script>
+    <script src="ADMIN_TPL_JS/bootstrap.min-v=3.3.6.js"></script>
+    <script src="ADMIN_TPL_JS/plugins/iCheck/icheck.min.js"></script>
+    <script src="ADMIN_TPL_JS/plugins/validate/jquery.validate.min.js"></script>
+    <script src="ADMIN_TPL_JS/plugins/validate/messages_zh.min.js"></script>
+    <script src="ADMIN_TPL_JS/plugins/sweetalert/sweetalert.min.js"></script>
+    <script src="ADMIN_CUS_PLUG/editor/js/wangEditor.min.js"></script>
+    <script src="ADMIN_CUS_PLUG/editor/plupload/plupload.full.min.js"></script>
+    <script>
+        var add_page_url = "{:U('Page/page_add')}";
+        var managePage = "{:U('Page/index')}";
+        var uploadUrl = "{:U('Upload/upload_file')}"
+        $(document).ready(function() {
+            $(".i-checks").iCheck({
+                checkboxClass: "icheckbox_square-green",
+                radioClass: "iradio_square-green",
+            });
+        });
+    </script>
+    <script src="ADMIN_CUS_PLUG/editor/conf.js"></script>
+    <script src="ADMIN_CUS_JS/page/validator.page.js"></script>
+    <script src="ADMIN_CUS_JS/page/page.js"></script>
+</body>
+
+</html>

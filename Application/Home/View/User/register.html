@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>注册</title>
+    <meta name="keywords" content="{:C('WEB_KEYWORDS')}">
+    <meta name="description" content="{:C('WEB_DESCRIPTION')}">
+    <link rel="shortcut icon" href="{:C('WEB_FAVICON')}">
+    <link rel="stylesheet" href="HOME_TPL_CSS/bootstrap.min.css">
+    <link rel="stylesheet" href="HOME_TPL_CSS/register.css">
+    <link rel="stylesheet" href="HOME_TPL_CSS/header.css">
+    <link rel="stylesheet" href="HOME_TPL_CSS/buttom.css">
+    <link rel="stylesheet" href="HOME_TPL_CSS/top.css">
+    <link rel="stylesheet" href="HOME_TPL_CSS/validationEngine.jquery.css">
+</head>
+
+<body>
+    <!--头部-->
+    <include file="./Static/head" />
+    <!--首页导航栏-->
+    <include file="./Static/nav" />
+
+    <section>
+        <div class="register">
+            <div class="container">
+
+                <div class="welcomeregister">
+                    <div class="welcomeregister-padding center-block">
+                        <h3>欢 迎 注 册</h3>
+                        <hr>
+                        <form class="center-block" action="?" method="post" id="RegisterForm">
+                            <div class="form-item">
+                                <label class="text-center" for="input1">用&nbsp; 户&nbsp; 名</label><input id="input1" name="uname"
+                                    type="text" placeholder="您的账户名" class="validate[required,minSize[6],maxSize[15],custom[onlyLetterNumber]]">
+                            </div>
+                            <div class="form-item">
+                                <label class="text-center" for="input2">密码</label><input type="password" id="input2" name="password"
+                                    placeholder="请输入密码" class="validate[required,minSize[6],maxSize[15],custom[onlyLetterNumber]]">
+                            </div>
+                            <div class="form-item">
+                                <label class="text-center" for="input3">确认密码</label><input type="password" id="input3" name="confirm_password"
+                                    placeholder="请再次输入密码" class="validate[required,minSize[6],maxSize[15],custom[onlyLetterNumber],equals[input2]]">
+                            </div>
+                            <div class="form-item">
+                                <label class="text-center" for="input4">邮箱</label><input type="text" id="input4" name="email"
+                                    placeholder="邮箱" class="validate[required,custom[email]]">
+                            </div>
+                            <div class="form-item">
+                                <label class="text-center" for="input5">验&nbsp; 证&nbsp; 码</label><input id="input5" name="verify"
+                                    class="verification validate[required]" type="text" placeholder="请输入验证码">
+                                <div class=""><img id="verifyimg" src="{:U('User/showVerify')}"></div>
+                            </div>
+                            <div class="form-item">
+                                <button type="submit" class="btn btn-primary btn-block center-block">注 册</button>
+                            </div>
+                        </form>
+                        <hr>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--底部区-->
+    <include file="./Static/footer" />
+    <a id="gotop" href="JavaScript:void(0)" class="text-center"><img src="HOME_TPL_IMG/returntop.png" alt=""></a>
+    <script src="HOME_TPL_JS/jquery.min.js"></script>
+    <script src="HOME_TPL_JS/bootstrap.min.js"></script>
+    <script src="HOME_TPL_JS/top.js"></script>
+    <script src="HOME_TPL_JS/jquery.validationEngine-zh_CN.js"></script>
+    <script src="HOME_TPL_JS/jquery.validationEngine.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $("#verifyimg").click(function () {
+                var verifyURL = "{:U('User/showVerify', '', '')}";
+                var time = new Date().getTime();
+                $(this).attr({
+                    "src": verifyURL + "/" + time
+                });
+            });
+            $('#RegisterForm').validationEngine('attach', {
+                promptPosition: 'centerRight: -50, -10',
+            });
+
+        });
+    </script>
+</body>
+
+</html>
